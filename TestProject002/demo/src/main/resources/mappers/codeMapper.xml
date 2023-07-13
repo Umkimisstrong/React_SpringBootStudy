@@ -9,7 +9,13 @@
 <!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
     <select id="selectCodeNm" 
             parameterType="com.example.model.CodeModel"
-            resultType="com.example.model.CodeModel">
-        SELECT Code_NM, Code_ID FROM TB_CMM_CODE WHERE Code_ID = ( #{Code_ID} );
+            resultType="com.example.model.CodeModel"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_Code_S
+                (
+                    #{Code_ID}
+                )
+        }
     </select>
 </mapper>

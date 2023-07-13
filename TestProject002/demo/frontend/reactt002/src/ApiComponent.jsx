@@ -5,7 +5,7 @@ class ApiComponent extends Component {
     constructor(props){
         super(props)
         this.state = {
-            message:""
+            CodeModel:""
         }
     }
 
@@ -22,13 +22,13 @@ class ApiComponent extends Component {
                     'Access-Control-Allow-Headers': 'Content-Type',
                 },
                 params:{
-                    Code_ID:"MNT_STS"
+                    Code_ID:"RECIPE"
                 }
             })
              .then(res => {
                 console.log(res);
                 this.setState({
-                    message:res.data.message
+                    CodeModel:res.data.CodeModel
                 })
              })
              .catch(res => console.log(res))
@@ -36,8 +36,32 @@ class ApiComponent extends Component {
     render() {
         return (
             <div>
-                Api Message :
-                {this.state.message}
+                <table>
+                    <thead>
+
+                    <tr>
+                        <th>Code ID</th>
+                        <td>{this.state.CodeModel.Code_ID}</td>
+                    </tr>
+                    <tr>
+                        <th>Parent Code ID</th>
+                        <td>{this.state.CodeModel.Parent_Code_ID}</td>
+                    </tr>
+                    <tr>
+                        <th>Code Name</th>
+                        <td>{this.state.CodeModel.Code_NM}</td>
+                    </tr>
+                    <tr>
+                        <th>Code Kor Name</th>
+                        <td>{this.state.CodeModel.Code_KOR_NM}</td>
+                    </tr>
+                    <tr>
+                        <th>Code Eng Name</th>
+                        <td>{this.state.CodeModel.Code_ENG_NM}</td>
+                    </tr>
+                    </thead>
+
+                </table>
             </div>
         )
     }

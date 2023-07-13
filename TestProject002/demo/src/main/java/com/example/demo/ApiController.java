@@ -15,14 +15,14 @@ public class ApiController {
     private SqlSession sqlSession;
 
     @GetMapping("/api/hello")
-    public HashMap<String, String> hello(String Code_ID)  throws SQLException, ClassNotFoundException
+    public HashMap<String, Object> hello(String Code_ID)  throws SQLException, ClassNotFoundException
     {
-        HashMap<String, String> result = new HashMap<String, String>();
+        HashMap<String, Object> result = new HashMap<String, Object>();
 
         CodeModel request = new CodeModel();
         if(Code_ID == "" || Code_ID == null)
         {
-            Code_ID = "Centero";
+            Code_ID = "RECIPE";
         }
         request.Code_ID = Code_ID;
         
@@ -31,9 +31,9 @@ public class ApiController {
 
         resultCode = mapper.selectCodeNm(request);
 
-        //result.put("message", "안녕하세요");
-        result.put("message", resultCode.Code_NM);
-
+        result.put("CodeModel", resultCode);    
+        
+        
 
         
         return result;
