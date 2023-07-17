@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
 import './App.css';
+import Layout from './components/shared/Layout';
 
 import TopMenuComponent from "./TopMenuComponent"
 function App() {
@@ -27,16 +28,25 @@ function App() {
   //   </div>
   // );
 
+    // return (
+    //   <div className="App">
+    //       <div>
+    //         <TopMenuComponent>
+
+    //         </TopMenuComponent>
+    //       </div>
+    //   </div>
+    // )
+
     return (
       <div className="App">
           <div>
-            <TopMenuComponent>
-
-            </TopMenuComponent>
+            <Layout>
+              
+            </Layout>
           </div>
       </div>
     )
-
 
 }
 
