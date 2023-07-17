@@ -1,5 +1,6 @@
 // components / Shared / Footer.jsx
 
+import React from 'react'
 const Footer = () => {
 
     return (
