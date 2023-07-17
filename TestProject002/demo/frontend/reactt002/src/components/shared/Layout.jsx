@@ -2,6 +2,7 @@
 // ** 전체 레이아웃 컴포넌트 ** 
 // ** Header 와 Footer 를 import 받아 사용 **
 
+import styles from  "../../components/cssModule/Layout.module.css"
 import React from 'react'
 import Header from "./Header"
 import Footer from "./Footer"
@@ -10,10 +11,10 @@ import Footer from "./Footer"
 const Layout = () => {
 
     return (
-        <div>
+        <div className={styles.layout}>
             <Header></Header>
 
-            <main></main>
+            <main> Main Contents will be show</main>
 
             <Footer></Footer>
         </div>
