@@ -6,7 +6,7 @@ import styles from  "../../components/cssModule/Layout.module.css"
 import React from 'react'
 import Header from "./Header"
 import Footer from "./Footer"
-
+import Main from "./Main"
 
 const Layout = () => {
 
@@ -14,7 +14,7 @@ const Layout = () => {
         <div className={styles.layout}>
             <Header></Header>
 
-            <main> Main Contents will be show</main>
+            <Main></Main>
 
             <Footer></Footer>
         </div>
