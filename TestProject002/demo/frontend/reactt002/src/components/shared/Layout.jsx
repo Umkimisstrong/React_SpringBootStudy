@@ -2,23 +2,32 @@
 // ** 전체 레이아웃 컴포넌트 ** 
 // ** Header 와 Footer 를 import 받아 사용 **
 
+import {BrowserRouter} from "react-router-dom";
+
 import styles from  "../../components/cssModule/Layout.module.css"
 import React from 'react'
 import Header from "./Header"
 import Footer from "./Footer"
 import Main from "./Main"
 
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
 
 const Layout = () => {
 
     return (
         <div className={styles.layout}>
-            <Header></Header>
+            <BrowserRouter>
+                {/* Header 영역 */}
+                <Header></Header>
 
-            <Main></Main>
+                {/* Main Contents 영역 */}
+                <Main></Main>
 
-            <Footer></Footer>
+
+                {/* Footer 영역 */}
+                <Footer></Footer>
+
+            </BrowserRouter>
         </div>
     )
 }

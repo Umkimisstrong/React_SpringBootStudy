@@ -1,8 +1,13 @@
 // components / Shared / Header.jsx
 
-import styles from  "../../components/cssModule/Header.module.css"
-import logo from "../../StaticContent/gentelella/build/image/crown.png"
-import React from 'react'
+
+import { Link } from 'react-router-dom';
+import styles from  "../../components/cssModule/Header.module.css";
+import logo from "../../StaticContent/gentelella/build/image/crown.png";
+import React from 'react';
+
+
+
 
 const Header = () => {
 
@@ -24,11 +29,15 @@ const Header = () => {
                 {/* Nav Bar */}
                 <nav className={styles.con_NavBar}>
                     <ul className={styles.nav_ul}>
-                        <li className={styles.nav_li}>로그인</li>
-                        <li className={styles.nav_li}>회원가입</li>
+                       <Link to="/default/login">
+                            <li className={styles.nav_li}>로그인</li>
+                       </Link> 
+                       <Link to="/default/signup">
+                            <li className={styles.nav_li}>회원가입</li>
+                       </Link> 
                     </ul>
                 </nav>
-            </div>
+           </div>
         </header>
     )
 }
