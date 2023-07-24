@@ -8,6 +8,8 @@ import Header from "./Header"
 import Footer from "./Footer"
 import Main from "./Main"
 
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+
 const Layout = () => {
 
     return (
