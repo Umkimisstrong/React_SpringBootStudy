@@ -4,11 +4,12 @@
 
 import {BrowserRouter} from "react-router-dom";
 
-import styles from  "../../components/cssModule/Layout.module.css"
+import styles from  "../../components/cssModule/default/Layout.module.css"
 import React from 'react'
 import Header from "./Header"
-import Footer from "./Footer"
 import Main from "./Main"
+
+
 
 
 
@@ -22,10 +23,6 @@ const Layout = () => {
 
                 {/* Main Contents 영역 */}
                 <Main></Main>
-
-
-                {/* Footer 영역 */}
-                <Footer></Footer>
 
             </BrowserRouter>
         </div>

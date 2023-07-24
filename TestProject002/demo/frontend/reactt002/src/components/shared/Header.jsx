@@ -2,7 +2,7 @@
 
 
 import { Link } from 'react-router-dom';
-import styles from  "../../components/cssModule/Header.module.css";
+import styles from  "../../components/cssModule/default/Header.module.css";
 import logo from "../../StaticContent/gentelella/build/image/crown.png";
 import React from 'react';
 
@@ -29,10 +29,10 @@ const Header = () => {
                 {/* Nav Bar */}
                 <nav className={styles.con_NavBar}>
                     <ul className={styles.nav_ul}>
-                       <Link to="/default/login">
+                       <Link to="/default/login" className={styles.nav_link}>
                             <li className={styles.nav_li}>로그인</li>
                        </Link> 
-                       <Link to="/default/signup">
+                       <Link to="/default/signup" className={styles.nav_link}>
                             <li className={styles.nav_li}>회원가입</li>
                        </Link> 
                     </ul>

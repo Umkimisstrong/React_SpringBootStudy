@@ -1,0 +1,10 @@
+/* components / cssModule / Login.module.css */
+
+.login_wrap { display: inline-block;          text-align: center;  width: 700px;  margin-top:50px;  margin-bottom:50px; 
+              background-color: #fff8de;    border-radius: 20px; height: 748px;  padding-top: 5px; padding-bottom: 5px; }
+
+.login_contents { display: inline-block; margin-top:5px; margin-bottom:5px; background-color: white; width: 80%; text-align: center; height: 98%;}
+
+.login_contents_tbl { display: inline-block; width: 95%;}
+.login_contents_btn_area { text-align: center; }
+.login_contents_hr {width: 95%; margin: auto; text-align: center;}

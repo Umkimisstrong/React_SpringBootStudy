@@ -1,5 +1,5 @@
 // components / Shared / Footer.jsx
-import styles from "../../components/cssModule/Footer.module.css"
+import styles from "../../components/cssModule/default/Footer.module.css"
 import React from 'react'
 const Footer = () => {
 

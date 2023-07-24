@@ -12,7 +12,8 @@ import FindPWComponent from "../../components/default/FindPW";
 import RecipeSaveComponent from "../../components/recipe/RecipeSave";
 import RecipeDetailComponent from "../../components/recipe/RecipeDetail";
 
-import styles from "../../components/cssModule/Main.module.css";
+
+import styles from "../../components/cssModule/default/Main.module.css";
 
 
 const Main = () => {
