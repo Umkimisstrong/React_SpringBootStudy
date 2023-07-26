@@ -1,8 +1,8 @@
-package com.example.model;
+package com.example.entity;
 
 import java.util.Date;
 
-public class CommonModel {
+public class CommonEntity {
     
     // 작성자
     public String Create_ID;
