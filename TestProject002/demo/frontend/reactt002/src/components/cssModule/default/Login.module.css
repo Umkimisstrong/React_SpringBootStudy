@@ -1,10 +1,39 @@
 /* components / cssModule / Login.module.css */
 
-.login_wrap { display: inline-block;          text-align: center;  width: 700px;  margin-top:50px;  margin-bottom:50px; 
-              background-color: #fff8de;    border-radius: 20px; height: 748px;  padding-top: 5px; padding-bottom: 5px; }
+/* wrap */
+.login_wrap { display: inline-block;          text-align: center;  width: 700px;  margin-top:130px;  margin-bottom:300px; 
+              background-color: #fff8de;    border-radius: 20px; height: 528px;  padding-top: 5px; padding-bottom: 5px; }
 
-.login_contents { display: inline-block; margin-top:5px; margin-bottom:5px; background-color: white; width: 80%; text-align: center; height: 98%;}
+/* contents */
+.login_contents { display: inline-block; margin-top:10px; margin-bottom:10px; background-color: white; width: 80%; text-align: center; height: 95%;}
 
-.login_contents_tbl { display: inline-block; width: 95%;}
+/* tbl */
+.login_contents_tbl { display: inline-block; width: 95%; height: 255px; margin-top:30px;}
+.login_contents_tbl_all { width: 95%; border-spacing:  10px;}
+.login_contents_tbl_thead { height: 100px; font-size:50px;}
+.login_contents_tbl_tbody { height: 150px;}
+
+.login_contents_tbl_th { width: 20%;}
+.login_contents_tbl_th_div { height: 50px; background-color: #fff891; border-radius: 65px; font-size:30px;}
+
+
+.login_contents_tbl_td { width: 70%;}
+.login_contents_tbl_td_div { height: 50px; border-color: #fff891; border-radius: 65px; font-size:30px; border-style: solid; margin: 0 auto;  width: 80%; margin-right:0}
+.login_contents_tbl_td_div_input {border: 0;   display: inline-table;   height: 25px;   width: 250px;   font-size: 28px; outline:0}
+
+
+/* btn */
 .login_contents_btn_area { text-align: center; }
-.login_contents_hr {width: 95%; margin: auto; text-align: center;}
+.login_contents_btn { width: 93%;   border: 0;   border-radius: 30px;   height: 45px;   font-size: 25px;   background-color: #e4ffc3; }
+
+.login_contents_btn_find { margin-top : 20px; width: 100%; display: flex; margin-bottom: 40px;}
+.login_contents_btn_find_div_left { width: 150px; margin-left: 10px;}
+.login_contents_btn_find_div_left_btn { width: 95%;   border: 0;   border-radius: 30px;   height: 40px;   font-size: 25px;   background-color: #a1d100; }
+
+.login_contents_btn_find_div_right { width: 150px; margin-left: 235px;}
+.login_contents_btn_find_div_right_btn { width: 95%;   border: 0;   border-radius: 30px;   height: 40px;   font-size: 25px;   background-color: #a1d100; }
+
+.login_contents_btn_find_div_signup { margin-top:10px; display: inline-block; margin-top:10px; }
+.login_contents_btn_find_div_signup_btn {  border: 0;   border-radius: 30px;   height: 30px;   font-size: 20px;   background-color: #ffbc59; margin-left: 10px; }
+.login_contents_hr {width: 95%; margin: auto; text-align: center; height: 3px;   background-color: grey;    border: 0;}
+
