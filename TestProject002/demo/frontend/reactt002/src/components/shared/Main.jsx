@@ -6,6 +6,7 @@ import {Routes, Route} from "react-router-dom";
 import IndexComponent from "../../components/default/Index";
 import LoginComponent from "../../components/default/Login";
 import SignUpComponent from "../../components/default/SignUp";
+import SignUpSaveComponent from "../../components/default/SignUpSave";
 import FindIDComponent from "../../components/default/FindID";
 import FindPWComponent from "../../components/default/FindPW";
 
@@ -27,6 +28,7 @@ const Main = () => {
                         <Route path="/default/index" element={<IndexComponent />}></Route>
                         <Route path="/default/login" element={<LoginComponent />}></Route>
                         <Route path="/default/signup" element={<SignUpComponent />}></Route>
+                        <Route path="/default/signupsave" element={<SignUpSaveComponent />}></Route>
                         <Route path="/default/findid" element={<FindIDComponent />}></Route>
                         <Route path="/default/findpw" element={<FindPWComponent />}></Route>
 

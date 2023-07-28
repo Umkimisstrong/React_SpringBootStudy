@@ -1,0 +1,41 @@
+/* components / cssModule / findid.module.css */
+
+/* wrap */
+.findid_wrap { display: inline-block;          text-align: center;  width: 700px;  margin-top:130px;  margin-bottom:300px; 
+    background-color: #fff8de;    border-radius: 20px; height: 528px;  padding-top: 5px; padding-bottom: 5px; }
+
+/* contents */
+.findid_contents { display: inline-block; margin-top:10px; margin-bottom:10px; background-color: white; width: 80%; text-align: center; height: 95%;}
+
+/* tbl */
+.findid_contents_tbl { display: inline-block; width: 95%; height: 255px; margin-top:30px;}
+.findid_contents_tbl_all { width: 95%; border-spacing:  10px; display: inherit;}
+.findid_contents_tbl_thead { height: 100px; font-size:50px;}
+.findid_contents_tbl_tbody { height: 150px;}
+
+.findid_contents_tbl_th { width: 20%;}
+.findid_contents_tbl_th_div { height: 40px; background-color: #fff891; border-radius: 65px; font-size:25px; width: 120px;}
+
+
+.findid_contents_tbl_td { width: 80%;}
+.findid_contents_tbl_td_div { height: 40px; border-color: #fff891; border-radius: 65px; font-size:25px; border-style: solid; margin: 0 auto;  width: 90%; margin-right:0;}
+.findid_contents_tbl_td_div_input {border: 0;   display: inline-table;   height: 25px;   width: 260px;   font-size: 25px; outline:0}
+
+
+/* btn */
+.findid_contents_btn_area {text-align: center; margin-top: 15px;}
+.findid_contents_btn { width: 93%;   border: 0;   border-radius: 30px;   height: 45px;   font-size: 25px;   background-color: #e4ffc3; }
+
+.findid_contents_save_btn { width: 93%;   border: 0;   border-radius: 30px;   height: 45px;   font-size: 25px;   background-color: #e4ffc3; }
+
+.findid_contents_btn_find { margin-top : 20px; width: 100%; display: flex; margin-bottom: 40px;}
+.findid_contents_btn_find_div_left { width: 150px; margin-left: 10px;}
+.findid_contents_btn_find_div_left_btn { width: 95%;   border: 0;   border-radius: 30px;   height: 40px;   font-size: 25px;   background-color: #a1d100; }
+
+.findid_contents_btn_find_div_right { width: 150px; margin-left: 235px;}
+.findid_contents_btn_find_div_right_btn { width: 95%;   border: 0;   border-radius: 30px;   height: 40px;   font-size: 25px;   background-color: #a1d100; }
+
+.findid_contents_btn_find_div_signup { margin-top:10px; display: inline-block; margin-top:10px; }
+.findid_contents_btn_find_div_signup_btn {  border: 0;   border-radius: 30px;   height: 30px;   font-size: 20px;   background-color: #ffbc59; margin-left: 10px; }
+.findid_contents_hr {width: 95%; margin: auto; text-align: center; height: 3px;   background-color: grey;    border: 0;}
+

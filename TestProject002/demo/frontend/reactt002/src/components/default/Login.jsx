@@ -9,6 +9,16 @@ import styles from "../../components/cssModule/default/Login.module.css"
 
 const Login = () => {
 
+    /// 이름 : onclickHref(주소, 이벤트객체) 
+    /// 설명 : 넘겨받은 주소로 이동시키는 함수
+    /// 비고 : 아이디찾기, 비밀번호찾기, 회원가입 페이지로 이동한다.
+    function onclickHref (url, e) 
+    {
+        e.preventDefault();
+        window.location.href="http://localhost:3000/default/"+url;
+    }
+
+
     return (
            <div className={styles.login_wrap}>
               <div className={styles.login_contents}>
@@ -55,10 +65,10 @@ const Login = () => {
                         <input type='button' className={styles.login_contents_btn} value='로그인'></input>
                         <div className={styles.login_contents_btn_find}>
                             <div className={styles.login_contents_btn_find_div_left}>
-                            <input type='button' className={styles.login_contents_btn_find_div_left_btn} value='ID 찾기'></input>
+                                <input type='button' className={styles.login_contents_btn_find_div_left_btn} value='ID 찾기' onClick={(e) => onclickHref('findid', e)}></input>
                             </div>
                             <div className={styles.login_contents_btn_find_div_right}>
-                            <input type='button' className={styles.login_contents_btn_find_div_right_btn} value='PW 찾기'></input>
+                                <input type='button' className={styles.login_contents_btn_find_div_right_btn} value='PW 찾기' onClick={(e) => onclickHref('findpw', e)}></input>
                             </div>
                         </div>
                         <hr className={styles.login_contents_hr}></hr>
@@ -66,7 +76,7 @@ const Login = () => {
 
                     <div className={styles.login_contents_btn_find_div_signup}>
                         계정이 없으신가요? 
-                    <input type='button' className={styles.login_contents_btn_find_div_signup_btn} value='회원가입'></input>
+                    <input type='button' className={styles.login_contents_btn_find_div_signup_btn} value='회원가입' onClick={(e) => onclickHref('signup', e)}></input>
                     </div>
                     
                 </div> {/*   end region : login_contents */}

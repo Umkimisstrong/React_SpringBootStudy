@@ -11,14 +11,22 @@ import React from 'react';
 
 const Header = () => {
 
+    function onclickHref (url, e)
+    {
+        window.location.href = "http://localhost:3000/default/" + url;
+    }
+
+
     return (
+
+        
 
         <header className={styles.header}>
             <div className={styles.contents}>
                 {/* Logo */}
                 <div className={styles.con_Logo}>
                 
-                <img src={logo} alt="React" className={styles.con_Logo_img}></img>
+                <img src={logo} alt="React" className={styles.con_Logo_img} onClick={(e) => onclickHref('index', e)}></img>
                 </div>
 
                 {/* Center */}
