@@ -7,9 +7,26 @@
 <mapper namespace="com.example.mapper.CodeMapper">
 
 <!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
-    <select id="selectCodeNm" 
+
+    <!-- 
+        ● 참고 
+            1. select 속성의 mybatis 
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 한 행이 포함하고 있는 Data Type (ex. Code Entity) 로 명시
+                               !! 한개든 2개든 !!
+
+            2. insert , update 속성의 mybatis
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 선언하지 않는다.
+     -->
+    <!-- UP_CMM_Code_S -->
+    <select id="selectCodeEntity" 
             parameterType="com.example.model.CodeModel"
-            resultType="com.example.model.CodeModel"
+            resultType="com.example.entity.CodeEntity"
             statementType="CALLABLE">
         {
                 call UP_CMM_Code_S
@@ -18,4 +35,65 @@
                 )
         }
     </select>
+
+    <!-- UP_CMM_Code_L -->
+    <select id="selectCodeEntityList" 
+            parameterType="com.example.model.CodeModel"
+            resultType="com.example.entity.CodeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_Code_L
+                (
+                    #{Parent_Code_ID}
+                )
+        }
+    </select>
+
+    <!-- UP_CMM_Code_C -->
+    <insert id="createCodeEntity" 
+            parameterType="com.example.model.CodeModel"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_Code_C
+                (
+                    #{Code_ID}			
+                    #{Parent_Code_ID}		
+                    #{Code_NM}			
+                    #{Code_KOR_NM}		
+                    #{Code_ENG_NM}		
+                    #{Extension_Code_1}
+                    #{Extension_Code_2}	
+                    #{Extension_Code_3}	
+                    #{Extension_Code_4}	
+                    #{Extension_Code_5}	
+                    #{Use_YN}				
+                    #{Sort_Order}			
+                    #{Login_User_ID}		
+                )
+        }
+    </insert>
+
+    <!-- UP_CMM_Code_U -->
+    <update id="updateCodeEntity" 
+            parameterType="com.example.model.CodeModel"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_Code_U
+                (
+                    #{Code_ID}			
+                    #{Parent_Code_ID}		
+                    #{Code_NM}			
+                    #{Code_KOR_NM}		
+                    #{Code_ENG_NM}		
+                    #{Extension_Code_1}
+                    #{Extension_Code_2}	
+                    #{Extension_Code_3}	
+                    #{Extension_Code_4}	
+                    #{Extension_Code_5}	
+                    #{Use_YN}				
+                    #{Sort_Order}			
+                    #{Login_User_ID}		
+                )
+        }
+    </update>
 </mapper>
