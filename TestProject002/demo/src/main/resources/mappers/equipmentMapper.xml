@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 아래 !DOCTYPE 이 있어야 관련 자동완성을 도와줍니다 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에 Mapper.class 위치를 명시하여 맵핑한다. -->
+<mapper namespace="com.example.mapper.EquipmentMapper">
+
+<!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
+
+    <!-- 
+        ● 참고 
+            1. select 속성의 mybatis 
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 한 행이 포함하고 있는 Data Type (ex. Account Entity) 로 명시
+                               !! 한개든 2개든 !!
+
+            2. insert , update 속성의 mybatis
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 선언하지 않는다.
+     -->
+   <!-- UP_RCP_Equipment_L -->
+    <select id="selectEquipmentList" 
+            parameterType="com.example.model.EquipmentModel"
+            resultType="com.example.entity.EquipmentEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Equipment_L
+                (
+                      #{EQUIP_Category}
+                    , #{EQUIP_Category_DIV}
+                    , #{EQUIP_Category_ID}
+                )
+        }
+    </select>
+
+    <!-- UP_RCP_Equipment_C -->
+    <insert id="createEquipment" 
+            parameterType="com.example.entity.EquipmentEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Equipment_C
+                (
+                      #{EQUIP_Parent_ID}
+	                , #{EQUIP_Category}
+	                , #{EQUIP_Category_DIV}
+	                , #{EQUIP_Category_ID}
+	                , #{EQUIP_Title}
+	                , #{EQUIP_Amount}
+	                , #{Login_User_ID}
+	            )
+        }
+    </insert>
+
+    <!-- UP_RCP_Equipment_D -->
+    <delete id="deleteEquipment" 
+            parameterType="com.example.model.EquipmentModel"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Equipment_D
+                (
+                      #{EQUIP_ID}
+                )
+        }
+    </delete>
+</mapper>

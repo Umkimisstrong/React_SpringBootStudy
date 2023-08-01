@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 아래 !DOCTYPE 이 있어야 관련 자동완성을 도와줍니다 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에 Mapper.class 위치를 명시하여 맵핑한다. -->
+<mapper namespace="com.example.mapper.IngredientMapper">
+
+<!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
+
+    <!-- 
+        ● 참고 
+            1. select 속성의 mybatis 
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 한 행이 포함하고 있는 Data Type (ex. Account Entity) 로 명시
+                               !! 한개든 2개든 !!
+
+            2. insert , update 속성의 mybatis
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 선언하지 않는다.
+     -->
+   <!-- UP_RCP_Ingredient_L -->
+    <select id="selectIngredientList" 
+            parameterType="com.example.model.IngredientModel"
+            resultType="com.example.entity.IngredientEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Ingredient_L
+                (
+                      #{INGD_Category}
+                    , #{INGD_Category_DIV}
+                    , #{INGD_Category_ID}
+                )
+        }
+    </select>
+
+    <!-- UP_RCP_Ingredient_C -->
+    <insert id="createIngredient" 
+            parameterType="com.example.entity.IngredientEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Ingredient_C
+                (
+                      #{INGD_Parent_ID}
+                    , #{INGD_Category}	
+                    , #{INGD_Category_DIV}
+                    , #{INGD_Category_ID}
+                    , #{INGD_Title}	
+                    , #{INGD_NM}		
+                    , #{INGD_Amount}
+                    , #{Login_User_ID}
+	            )
+        }
+    </insert>
+
+    <!-- UP_RCP_Ingredient_D -->
+    <delete id="deleteIngredient" 
+            parameterType="com.example.model.IngredientModel"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Ingredient_D
+                (
+                      #{INGD_ID}
+                )
+        }
+    </delete>
+
+    <!-- UP_RCP_Ingredient_U -->
+    <update id="updateIngredient" 
+            parameterType="com.example.entity.IngredientEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Ingredient_U
+                (
+                      #{INGD_ID}
+                    , #{INGD_Category}	
+                    , #{INGD_Category_DIV}
+                    , #{INGD_Category_ID}
+                    , #{INGD_Title}	
+                    , #{INGD_NM}		
+                    , #{INGD_Amount}
+                    , #{Login_User_ID}
+	            )
+        }
+    </update>
+</mapper>
