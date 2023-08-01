@@ -20,9 +20,11 @@ public class CodeController {
     @Autowired
     private SqlSession sqlSession;
 
-    /// 설명 : 코드 1건 (파라미터 : 코드 ID) 반환 API
+    /// 설명 : 코드 1건 반환 API
     @GetMapping("/api/code/select_code_entity")
-    public HashMap<String, Object> SelectCodeEntity(String Code_ID)  throws SQLException, ClassNotFoundException
+    public HashMap<String, Object> SelectCodeEntity(
+                                                        String Code_ID  // 코드 ID
+                                                   )  throws SQLException, ClassNotFoundException
     {
         HashMap<String, Object> result = new HashMap<String, Object>();
 
@@ -42,9 +44,11 @@ public class CodeController {
         return result;
     }
 
-    /// 설명 : 코드 여러건 (파라미터 : 부모코드 ID) 반환 API
+    /// 설명 : 코드 여러건 반환 API
     @GetMapping("/api/code/select_code_entity_list")
-    public HashMap<String, Object> SelectCodeEntityList(String Parent_Code_ID)  throws SQLException, ClassNotFoundException
+    public HashMap<String, Object> SelectCodeEntityList(
+                                                            String Parent_Code_ID // 상위 코드 ID
+                                                       )  throws SQLException, ClassNotFoundException
     {
         HashMap<String, Object> result = new HashMap<String, Object>();
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 아래 !DOCTYPE 이 있어야 관련 자동완성을 도와줍니다 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에 Mapper.class 위치를 명시하여 맵핑한다. -->
+<mapper namespace="com.example.mapper.AttachFileMapper">
+
+<!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
+
+    <!-- 
+        ● 참고 
+            1. select 속성의 mybatis 
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 한 행이 포함하고 있는 Data Type (ex. Account Entity) 로 명시
+                               !! 한개든 2개든 !!
+
+            2. insert , update 속성의 mybatis
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 선언하지 않는다.
+     -->
+
+    <!-- UP_CMM_AttachFile_L -->
+    <select id="selectAttachFileList" 
+            parameterType="com.example.model.AttachFileModel"
+            resultType="com.example.entity.AttachFileEntity"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_AttachFile_L
+                (
+                      #{Attach_Category}
+                    , #{Attach_Category_DIV}
+                    , #{Attach_Category_ID}
+                    , #{Attach_File_Group}
+                )
+        }
+    </select>
+
+    <!-- UP_CMM_AttachFile_C -->
+    <insert id="createAttachFile" 
+            parameterType="com.example.entity.AttachFileEntity"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_AttachFile_C
+                (
+                      #{Attach_Category}
+                    , #{Attach_Category_DIV}
+                    , #{Attach_Category_ID}
+                    , #{Attach_File_Group}
+                    , #{Attach_FilePath}	
+                    , #{Attach_RealFile_NM}
+                    , #{Attach_ServerFile_NM}
+                    , #{Attach_FileSize}	
+                    , #{Attach_FileType}		
+                    , #{Use_YN}		
+                    , #{Open_YN}				
+                    , #{Attach_Remarks}
+                    , #{Login_User_ID}		
+
+	            )
+        }
+    </insert>
+
+    <!-- UP_CMM_AttachFile_D -->
+    <delete id="deleteAttachFile" 
+            parameterType="com.example.model.AttachFileModel"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_AttachFile_D
+                (
+                      #{Attach_ID}
+                )
+        }
+    </delete>
+
+    
+</mapper>

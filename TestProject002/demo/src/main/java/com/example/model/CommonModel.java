@@ -16,4 +16,10 @@ public class CommonModel {
     // 수정일
     public Date Update_DT;
 
+    // 페이지 번호
+    public int PAGE_NUMBER;
+
+    // 행 수
+    public int ROW_COUNT;
+
 }
