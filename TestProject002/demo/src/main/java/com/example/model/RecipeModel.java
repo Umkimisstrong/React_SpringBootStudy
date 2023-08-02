@@ -42,4 +42,6 @@ public class RecipeModel extends CommonModel {
     // 레시피 공개여부
     public String Open_YN;
 
+    public String RCP_Owner_NM;
+
 }

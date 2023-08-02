@@ -22,4 +22,6 @@ public class CommonModel {
     // 행 수
     public int ROW_COUNT;
 
+    // 로그인 유저 ID
+    public String Login_User_ID;
 }

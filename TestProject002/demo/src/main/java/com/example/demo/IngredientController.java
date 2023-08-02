@@ -23,7 +23,7 @@ public class IngredientController {
 
     /// 설명 : 재료 여러건 반환 API
     @GetMapping("/api/rcp/select_ingredient_entity_list")
-    public HashMap<String, Object> SelectIngredientEntity(
+    public HashMap<String, Object> SelectIngredientEntityList(
                                                             String INGD_Category           // 도구 분류
                                                         ,   String INGD_Category_DIV       // 도구 분류 디비전
                                                         ,   String INGD_Category_ID        // 도구 분류 ID

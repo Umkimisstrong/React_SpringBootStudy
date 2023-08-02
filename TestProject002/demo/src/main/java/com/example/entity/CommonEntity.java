@@ -16,4 +16,13 @@ public class CommonEntity {
     // 수정일
     public Date Update_DT;
 
+    // 페이지 번호
+    public int PAGE_NUMBER;
+
+    // 행 수
+    public int ROW_COUNT;
+
+    // 로그인 유저 ID
+    public String Login_User_ID;
+
 }

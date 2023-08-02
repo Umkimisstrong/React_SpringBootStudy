@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 아래 !DOCTYPE 이 있어야 관련 자동완성을 도와줍니다 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에 Mapper.class 위치를 명시하여 맵핑한다. -->
+<mapper namespace="com.example.mapper.RecipeMapper">
+
+<!-- Mapper.class에 매소드명이 id 파라미터 타입은 풀패키지명 또는 properties에 설정으로.. -->
+
+    <!-- 
+        ● 참고 
+            1. select 속성의 mybatis 
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 한 행이 포함하고 있는 Data Type (ex. Account Entity) 로 명시
+                               !! 한개든 2개든 !!
+
+            2. insert , update 속성의 mybatis
+                - Stored Procedure 사용 시
+                    statementType 을 "CALLABLE" 로 지정
+                    parameterType 을 패키지 단위로 명시
+                    resultType 을 선언하지 않는다.
+     -->
+   <!-- UP_RCP_Recipe_L -->
+    <select id="selectRecipeList" 
+            parameterType="com.example.model.RecipeModel"
+            resultType="com.example.entity.RecipeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Recipe_L
+                (
+                      #{RCP_Owner_NM}
+                    , #{RCP_Title}		
+                    , #{RCP_DishType_CD}
+                    , #{RCP_Situation_CD}
+                    , #{RCP_Main_Ingredients_CD}
+                    , #{RCP_Method_CD}
+                    , #{RCP_Theme_CD}		
+                    , #{PAGE_NUMBER}		
+                    , #{ROW_COUNT}			
+                )
+        }
+    </select>
+
+    <!-- UP_RCP_Recipe_S -->
+    <select id="selectRecipeEntity" 
+            parameterType="com.example.model.RecipeModel"
+            resultType="com.example.entity.RecipeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Recipe_S
+                (
+                      #{RCP_ID}
+                )
+        }
+    </select>
+
+    <!-- UP_RCP_Recipe_C -->
+    <select id="createRecipe" 
+            parameterType="com.example.entity.RecipeEntity"
+            resultType="com.example.entity.RecipeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Recipe_C
+                (
+                      #{RCP_Title}
+                    , #{RCP_Contents}
+                    , #{RCP_Amount_CD}
+                    , #{RCP_Time_CD}		
+                    , #{RCP_Difficulty_CD}
+                    , #{RCP_DishType_CD}	
+                    , #{RCP_Situation_CD}
+                    , #{RCP_Main_Ingredients_CD}
+                    , #{RCP_Method_CD}
+                    , #{RCP_Theme_CD}
+                    , #{Open_YN}		
+                    , #{Login_User_ID}
+	            )
+        }
+    </select>
+
+    <!-- UP_RCP_Recipe_D -->
+    <delete id="deleteRecipe" 
+            parameterType="com.example.model.RecipeModel"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Recipe_D
+                (
+                      #{RCP_ID}
+                )
+        }
+    </delete>
+
+    <!-- UP_RCP_Recipe_U -->
+    <update id="updateRecipe" 
+            parameterType="com.example.entity.RecipeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_RCP_Recipe_U
+                (
+                      #{RCP_ID}
+                    , #{RCP_Title}
+                    , #{RCP_Contents}
+                    , #{RCP_Amount_CD}
+                    , #{RCP_Time_CD}		
+                    , #{RCP_Difficulty_CD}
+                    , #{RCP_DishType_CD}	
+                    , #{RCP_Situation_CD}
+                    , #{RCP_Main_Ingredients_CD}
+                    , #{RCP_Method_CD}
+                    , #{RCP_Theme_CD}
+                    , #{Open_YN}		
+                    , #{Login_User_ID}
+                )
+        }
+    </update>
+
+</mapper>
