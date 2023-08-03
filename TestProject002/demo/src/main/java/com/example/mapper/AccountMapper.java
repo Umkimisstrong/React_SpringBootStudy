@@ -21,7 +21,7 @@ public interface AccountMapper {
     public int createAccountEntity(AccountModel accountModel);
 
     // 계정 수정 : UP_ACT_Account_U
-    public int ureateAccountEntity(AccountModel accountModel);
+    public int updateAccountEntity(AccountModel accountModel);
 
     // 계정 사용 여부 수정 : UP_ACT_Account_Use_YN_U
     public int updateAccountUseYN(AccountModel accountModel);

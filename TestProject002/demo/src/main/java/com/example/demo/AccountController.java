@@ -20,6 +20,8 @@ public class AccountController {
     private int DEFAULT_PAGE_NUMBER = 1;
     private int DEFAULT_ROW_COUNT = 10;
     
+    private String BOOLEAN_RESULT = "ISRESULT";
+    private Boolean ISRESULT      = false;
     @Autowired
     private SqlSession sqlSession;
 
@@ -82,6 +84,113 @@ public class AccountController {
         return result;
     }
 
+    /// 설명 : 계정 생성 API
+    @GetMapping("/api/account/create_account_entity")
+    public HashMap<String, Object> CreateAccountEntity(
+                                                            String Account_ID       // 계정 ID
+                                                          , String ACT_Email        // 계정 Email
+                                                          , String ACT_Password     // 계정 비밀번호
+                                                          , String ACT_Name         // 계정 이름
+                                                          , String ACT_NickName     // 계정 닉네임
+                                                          , String ACT_Activate_YN  // 계정 활성화 여부
+                                                          , String Delete_YN        // 계정 삭제 여부
+                                                          , String Use_YN           // 계정 사용 여부
+                                                      )
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        AccountModel request = new AccountModel();
+      
+        request.Account_ID      = Account_ID;
+        request.ACT_Email       = ACT_Email;
+        request.ACT_Password    = ACT_Password;
+        request.ACT_Name        = ACT_Name;
+        request.ACT_NickName    = ACT_NickName;
+        request.ACT_Activate_YN = ACT_Activate_YN;
+        request.Delete_YN       = Delete_YN;
+        request.Use_YN          = Use_YN;
+
+
+        
+        int CREATE_RESULT = 0;
+        
+        AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+        CREATE_RESULT = mapper.createAccountEntity(request);
+
+        if(CREATE_RESULT>0)
+            ISRESULT = true;
+
+        result.put(BOOLEAN_RESULT, ISRESULT);    
+
+        return result;
+    }
+
+    /// 설명 : 계정 수정 API
+    @GetMapping("/api/account/update_account_entity")
+    public HashMap<String, Object> UpdateAccountEntity(
+                                                            String Account_ID       // 계정 ID
+                                                          , String ACT_Email        // 계정 Email
+                                                          , String ACT_Password     // 계정 비밀번호
+                                                          , String ACT_Name         // 계정 이름
+                                                          , String ACT_NickName     // 계정 닉네임
+                                                          , String ACT_Activate_YN  // 계정 활성화 여부
+                                                          , String Delete_YN        // 계정 삭제 여부
+                                                          , String Use_YN           // 계정 사용 여부
+                                                      )
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        AccountModel request = new AccountModel();
+      
+        request.Account_ID      = Account_ID;
+        request.ACT_Email       = ACT_Email;
+        request.ACT_Password    = ACT_Password;
+        request.ACT_Name        = ACT_Name;
+        request.ACT_NickName    = ACT_NickName;
+        request.ACT_Activate_YN = ACT_Activate_YN;
+        request.Delete_YN       = Delete_YN;
+        request.Use_YN          = Use_YN;
+
+
+        
+        int UPDATE_RESULT = 0;
+        
+        AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+        UPDATE_RESULT = mapper.updateAccountEntity(request);
+
+        if(UPDATE_RESULT>0)
+            ISRESULT = true;
+
+        result.put(BOOLEAN_RESULT, ISRESULT);    
+
+        return result;
+    }
     
+    /// 설명 : 계정 사용여부 수정 API
+    @GetMapping("/api/account/update_account_use_yn")
+    public HashMap<String, Object> UpdateAccountUseYN(
+                                                            String Account_ID       // 계정 ID
+                                                          , String Use_YN           // 계정 사용 여부
+                                                      )
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        AccountModel request = new AccountModel();
+      
+        request.Account_ID      = Account_ID;
+        request.Use_YN          = Use_YN;
+        
+        int UPDATE_RESULT = 0;
+        
+        AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+        UPDATE_RESULT = mapper.updateAccountUseYN(request);
+
+        if(UPDATE_RESULT>0)
+            ISRESULT = true;
+
+        result.put(BOOLEAN_RESULT, ISRESULT);    
+
+        return result;
+    }
 
 }
