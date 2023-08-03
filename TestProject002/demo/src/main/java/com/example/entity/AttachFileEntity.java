@@ -19,7 +19,7 @@ public class AttachFileEntity extends CommonEntity {
     public int Attach_File_Group;
 
     // 파일 절대경로
-    public String Attach_File_Path;
+    public String Attach_FilePath;
 
     // 실제 파일 명
     public String Attach_RealFile_NM;
