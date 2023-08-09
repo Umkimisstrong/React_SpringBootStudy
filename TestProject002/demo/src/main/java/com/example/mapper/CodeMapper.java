@@ -20,7 +20,7 @@ public interface CodeMapper {
     public int createCodeEntity(CodeModel codeModel);
 
     // 코드 수정 : UP_CMM_Code_U
-    public int ureateCodeEntity(CodeModel codeModel);
+    public int updateCodeEntity(CodeModel codeModel);
 
 
 }
