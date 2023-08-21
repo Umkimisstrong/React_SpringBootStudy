@@ -1,0 +1,42 @@
+/* components / cssModule / Index.module.css */
+
+/* wrap */
+
+.index_wrap { display: inline-block;          text-align: center;  width: 1100px;  margin-bottom:100px; 
+    background-color: #fff8de;    border-radius: 20px; height: 300px;  padding-top: 5px; padding-bottom: 5px; }
+
+    
+/* contents */
+.index_contents { display: inline-block; margin-top:10px; margin-bottom:10px; 
+                  /* background-color: white;  */
+                  width: 95%; text-align: center; height: 95%;}
+
+
+/* search */
+.index_search { display: inline-block;  margin-top:100px;  width: 1100px; text-align: center;}
+.index_search_box_div { display: inline-block; height: 40px; border-color: #ffe891; border-radius: 0px; border-width: 4px;
+                        font-size:25px; border-style: solid; margin: 0 auto;  width: 60%; margin-right:0;}
+.index_search_div_input {border: 0;   display: inline-table;   height: 25px;   width: 500px;   font-size: 25px; outline:0; padding-left: 10px; }
+.index_search_button_div {     display: inline-block;    margin-left: 100px;    background-color: #ffe891;    width: 52px; cursor: pointer;}
+
+/* new */
+.index_new_recipe_div {width: 150px; display: inherit; margin-left: 30px; position: absolute;}
+.index_new_recipe_btn {height: 35px; outline: 0px; border-style: none; border-radius: 15px; width: 150px; background-color: #ffc8c8; font-size: 20px; font-weight: bold; }
+
+/* search tbl */
+.index_tbl {text-align: left;    border-spacing: 12px;    border-collapse: separate;}
+.index_tbl_th { width: 150px;    font-weight: bold;    font-size: 25px;    }
+
+/* recipe */
+.index_recipe_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:100px; 
+                    /* background-color: #fff8de;     */
+                    border-radius: 20px; height: 400px;  padding-top: 5px; padding-bottom: 5px; }
+
+.index_recipe_contents { display: inline-block; margin-top:10px; margin-bottom:10px; 
+                         /* background-color: white;  */
+                         width: 95%; text-align: center; height: 95%;}
+.index_recipe_sumnail { border-style: solid; border-radius: 150px; width: 150px; height: 150px; background-color: #e4ffc3; border-color: white; }
+
+/* recipe tbl */
+.index_recipe_tbl { border-spacing: 18px; border-collapse: separate; }
+
