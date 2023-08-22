@@ -4,7 +4,14 @@
 import React from 'react';
 import styles from "../../components/cssModule/default/Index.module.css";
 
-
+    /// 이름 : onclickHref(주소, 이벤트객체) 
+    /// 설명 : 넘겨받은 주소로 이동시키는 함수
+    /// 비고 : 신규 레시피 작성 페이지로 이동한다.
+    function onclickHref (url, e) 
+    {
+        e.preventDefault();
+        window.location.href="http://localhost:3000/"+url;
+    }
 
 
 const Index = () => {
@@ -24,13 +31,13 @@ const Index = () => {
                 </div>
 
                 <div className={styles.index_new_recipe_div}>
-                    <input value="새로만들기" type='button' className={styles.index_new_recipe_btn}></input>
+                    <input value="새로만들기" type='button' className={styles.index_new_recipe_btn} onClick={(e) => onclickHref("recipe/saverecipe", e)}></input>
                 </div>
 
                 
             </div>
 
-            {/* 분류 영역 */}
+            {/* 키워드 영역 */}
             <div className={styles.index_wrap}>
                 <div className={styles.index_contents}>
                 <table className={styles.index_tbl}>

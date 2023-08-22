@@ -1,0 +1,101 @@
+/* components / cssModule / Index.module.css */
+
+/* wrap */
+
+.recipe_save_label_wrap { display: inline-block; width: 300px; margin-right: 880px; font-size: 25px; font-weight: bold; background-color: #ffc8c8; height: 43px;
+                          text-align: center; vertical-align: middle; padding-left: 8px; border-radius: 15px;}
+.recipe_save_wrap { display: inline-block;          text-align: center;  width: 1100px;  margin-bottom:50px;  margin-top: 50px; 
+                    background-color: #fff8de;    border-radius: 20px; height: 350px;  padding-top: 5px; padding-bottom: 5px; }
+
+    
+/* contents */
+.recipe_save_contents { display: inline-block; margin-top:10px; margin-bottom:10px; 
+                  /* background-color: white;  */
+                  width: 95%; text-align: center; height: 95%;}
+
+.recipe_save_contents_plus_step {text-align: right;}                  
+
+
+/* search */
+.recipe_save_search { display: inline-block;  margin-top:100px;  width: 1100px; text-align: center;}
+.recipe_save_search_box_div { display: inline-block; height: 40px; border-color: #ffe891; border-radius: 0px; border-width: 4px;
+                        font-size:25px; border-style: solid; margin: 0 auto;  width: 60%; margin-right:0;}
+.recipe_save_search_div_input {border: 0;   display: inline-table;   height: 25px;   width: 500px;   font-size: 25px; outline:0; padding-left: 10px; }
+.recipe_save_search_button_div {     display: inline-block;    margin-left: 100px;    background-color: #ffe891;    width: 52px; cursor: pointer;}
+
+/* new */
+.recipe_save_new_recipe_div {width: 150px; display: inherit; margin-left: 30px; position: absolute;}
+.recipe_save_new_recipe_btn {height: 35px; outline: 0px; border-style: none; border-radius: 15px; width: 150px; background-color: #ffc8c8; font-size: 20px; font-weight: bold; }
+
+/* save tbl */
+.recipe_save_tbl {text-align: left;    border-spacing: 12px;    border-collapse: separate;}
+.recipe_save_tbl_th { width: 150px;    font-weight: bold;    font-size: 25px;    }
+.recipe_save_tbl_th_2 { width: 80px;    font-weight: bold;    font-size: 25px;    }
+.recipe_save_tbl_blank_td { width: 100px;}
+
+/* recipe */
+.recipe_save_keyword_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:30px;  margin-top: 110px;
+    background-color: #fff8de;     
+   border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
+
+.recipe_save_info_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:30px; 
+    background-color: #fff8de;     
+   border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
+   
+.recipe_save_recipe_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:100px; 
+                    /* background-color: #fff8de;     */
+                    border-radius: 20px; height: 400px;  padding-top: 5px; padding-bottom: 5px; }
+
+.recipe_save_recipe_contents { display: inline-block; margin-top:10px; margin-bottom:10px; 
+                         /* background-color: white;  */
+                         width: 95%; text-align: center; height: 95%;}
+.recipe_save_recipe_sumnail { border-style: solid; border-radius: 150px; width: 150px; height: 150px; background-color: #ffe891; border-color: white; }
+.recipe_save_recipe_sumnail_main { border-style: solid; border-radius: 150px; width: 150px; height: 150px; background-color: #e4ffc3; border-color: white; }
+.recipe_save_recipe_sumnail_photo_description {display: inline-block; margin-top: 45px; font-weight: bold; color: gray;}
+
+.recipe_save_sumnail_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:30px; 
+    background-color: #fff8de;     
+   border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
+
+/* recipe tbl */
+.recipe_save_recipe_tbl { border-spacing: 18px; border-collapse: separate; }
+
+/* recipe input */
+.recipe_save_input_title_and_description { width: 800px; outline: 0; border-color: white; border-radius: 15px; border-style: solid;}
+.recipe_save_input_ingredient_and_equip { width: 380px; outline: 0; border-color: white; border-radius: 15px; border-style: solid;}
+
+/* recipe selectbox */
+.recipe_save_select { width: 200px; outline: 0; border-color: white; border-radius:  15px; border-style: solid;}
+
+/* step */
+.recipe_save_step_plus_btn { outline: 0; border-color: white; background-color: #e4ffc3; font-weight: bold; border-radius: 15px; border-style: solid; width: 160px; height: 40px; font-size:22px;}
+.recipe_save_step_delete_btn { outline: 0; border-color: white; background-color: #ffc8c8; font-weight: bold; border-radius: 15px; border-style: solid; width: 90px; height: 35px; font-size:15px;}
+.recipe_save_step_ingd_plus_btn { outline: 0; border-color: white; background-color: #e4ffc3; font-weight: bold; border-radius: 15px; border-style: solid; width: 35px; height: 32px; font-size:15px;}
+
+.recipe_save_step_div { background-color: #e4ffc3; border-radius: 15px; height: 35px; font-size:22px; width: 150px;}
+
+.recipe_save_step_ingd_input { outline: 0; border-color: white; border-radius: 15px; width: 220px; border-style: solid; padding-left: 15px;}
+.recipe_save_step_ingd_amt_input { outline: 0; border-color: white; border-radius: 15px; width: 100px; border-style: solid;padding-left: 15px;}
+.recipe_save_step_ingd_ea_input { outline: 0; border-color: white; border-radius: 15px; width: 80px; border-style: solid;padding-left: 15px;}
+
+.recipe_save_step_equip_input { outline: 0; border-color: white; border-radius: 15px; width: 250px; border-style: solid;padding-left: 15px;}
+.recipe_save_step_equip_amt_input { outline: 0; border-color: white; border-radius: 15px; width: 80px; border-style: solid;padding-left: 15px;}
+
+.recipe_save_step_title_input { outline: 0; border-color: white; border-radius: 15px; width: 320px; border-style: solid;padding-left: 15px;}
+.recipe_save_step_tip_input { outline: 0; border-color: white; border-radius: 15px; width: 450px; border-style: solid;padding-left: 15px;}
+
+.recipe_save_step_sumnail_div { background-color: #ffe891; height: 80px; font-size:20px; width: 250px; font-weight: bold; color: gray;}
+
+/* btn area */
+.recipe_save_step_wrap { display: inline-block; text-align: center;  width: 1100px;  margin-bottom:30px; 
+     background-color: #fff8de;     
+    border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
+
+.recipe_save_btn { outline: 0; border-color: white; background-color: #38b6ff; font-weight: bold; border-radius: 15px; border-style: solid; width: 160px; height: 40px; font-size:22px;}
+.recipe_save_open_btn { outline: 0; border-color: white; background-color: #00bf63; font-weight: bold; border-radius: 15px; border-style: solid; width: 160px; height: 40px; font-size:22px; margin-left:6px;}
+
+
+.recipe_save_btn_wrap { display: inline-block; text-align: center;  width: 1100px;  
+    /* background-color: #fff8de;     */
+    margin-bottom: 100px;
+    border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
