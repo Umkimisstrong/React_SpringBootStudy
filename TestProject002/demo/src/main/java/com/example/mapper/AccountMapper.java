@@ -26,5 +26,10 @@ public interface AccountMapper {
     // 계정 사용 여부 수정 : UP_ACT_Account_Use_YN_U
     public int updateAccountUseYN(AccountModel accountModel);
 
+    // 계정 중복여부 확인 : UP_ACT_Account_Duplicate_S
+    public AccountEntity selectAccountDuplicate(AccountModel accountModel);
+
+    // 계정 로그인 확인 : UP_ACT_Account_Login_S
+    public AccountEntity selectAccountLogin(AccountModel accountModel);
 
 }

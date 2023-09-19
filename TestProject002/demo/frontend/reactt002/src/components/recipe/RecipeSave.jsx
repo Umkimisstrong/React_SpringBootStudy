@@ -6,14 +6,7 @@ import React from 'react';
 import styles from "../../components/cssModule/recipe/RecipeSave.module.css";
 
 
-    /// 이름 : onclickHref(주소, 이벤트객체) 
-    /// 설명 : 넘겨받은 주소로 이동시키는 함수
-    /// 비고 : 신규 레시피 작성 페이지로 이동한다.
-    function onclickHref (url, e) 
-    {
-        e.preventDefault();
-        window.location.href="http://localhost:3000/"+url;
-    }
+
 
 
 const RecipeSave = () => {

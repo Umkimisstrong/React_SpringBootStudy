@@ -107,4 +107,32 @@
                 )
         }
     </update>
+
+    <!-- UP_ACT_Account_Duplicate_S -->
+    <select id="selectAccountDuplicate" 
+            parameterType="com.example.model.AccountModel"
+            resultType="com.example.entity.AccountEntity"
+            statementType="CALLABLE">
+        {
+                call UP_ACT_Account_Duplicate_S
+                (
+                      #{Account_ID}
+                    , #{ACT_Email}
+                )
+        }
+    </select>
+
+     <!-- UP_ACT_Account_Login_S -->
+    <select id="selectAccountLogin"
+            parameterType="com.example.model.AccountModel"
+            resultType="com.example.entity.AccountEntity"
+            statementType="CALLABLE">
+        {
+                call UP_ACT_Account_Login_S
+                (
+                      #{Account_ID}
+                    , #{ACT_Password}
+                )
+        }
+    </select>
 </mapper>

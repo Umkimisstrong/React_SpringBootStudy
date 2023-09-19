@@ -37,6 +37,8 @@ public class AccountModel extends CommonModel {
     // AccountEntity 리스트
     public ArrayList<AccountEntity> AccountEntityList;
 
+    // 분기변수
+    public String ACT_FLAG;
 
 
     

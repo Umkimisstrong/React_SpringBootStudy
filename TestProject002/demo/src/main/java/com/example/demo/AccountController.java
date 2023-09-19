@@ -193,4 +193,52 @@ public class AccountController {
         return result;
     }
 
+
+    /// 설명 : 계정 중복여부 반환 API
+    @GetMapping("/api/account/select_account_duplicate")
+    public HashMap<String, Object> SelectAccountDuplicate(
+                                                        String Account_ID   // 계정 ID
+                                                        , String ACT_Email  // 계정 Email
+                                                      )  throws SQLException, ClassNotFoundException
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        AccountModel request = new AccountModel();
+
+        request.Account_ID = Account_ID;
+        request.ACT_Email  = ACT_Email;
+        
+        AccountEntity resultAccountEntity = new AccountEntity();
+
+        AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+        
+        resultAccountEntity = mapper.selectAccountDuplicate(request);
+
+        result.put("AccountEntity", resultAccountEntity);    
+        return result;
+    }
+
+    /// 설명 : 계정 중복여부 반환 API
+    @GetMapping("/api/account/select_account_login")
+    public HashMap<String, Object> SelectAccountLogin(
+                                                        String Account_ID       // 계정 ID
+                                                        , String ACT_Password   // 계정 PW
+                                                      )  throws SQLException, ClassNotFoundException
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        AccountModel request = new AccountModel();
+
+        request.Account_ID      = Account_ID;
+        request.ACT_Password    = ACT_Password;
+        
+        AccountEntity resultAccountEntity = new AccountEntity();
+
+        AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
+        
+        resultAccountEntity = mapper.selectAccountLogin(request);
+
+        result.put("AccountEntity", resultAccountEntity);    
+        return result;
+    }
 }

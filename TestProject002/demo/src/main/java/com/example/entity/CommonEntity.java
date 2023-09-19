@@ -25,4 +25,5 @@ public class CommonEntity {
     // 로그인 유저 ID
     public String Login_User_ID;
 
+
 }

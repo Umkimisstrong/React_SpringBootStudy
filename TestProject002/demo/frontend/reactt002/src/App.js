@@ -1,11 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import Layout from './components/shared/Layout';
 import Footer from "../src/components/shared/Footer"
 
-import TopMenuComponent from "./TopMenuComponent"
+//import TopMenuComponent from "./TopMenuComponent"
 function App() {
 
 

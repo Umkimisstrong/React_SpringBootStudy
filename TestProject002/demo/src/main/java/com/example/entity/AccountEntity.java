@@ -31,6 +31,9 @@ public class AccountEntity extends CommonEntity {
     // 사용 여부
     public String Use_YN;
 
+    // 분기변수
+    public String ACT_FLAG;
+
 
 
     
