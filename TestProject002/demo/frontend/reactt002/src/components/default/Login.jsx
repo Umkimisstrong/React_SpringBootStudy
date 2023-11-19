@@ -78,8 +78,11 @@ const Login = () => {
                 
                 if(ACT_FLAG_MSG === "OK")
                 {
-                    alert("로그인 성공");
-                    
+                    //alert("로그인 성공");
+                    sessionStorage.setItem("USER", res.data.AccountEntity);
+                    sessionStorage.setItem("ISLOGIN", "OK");
+
+                    window.location.href = "http://localhost:3000/default/index"; // 최초 리스트 페이지로 이동시킨다.
                     return false;
                 }
                 else if(ACT_FLAG_MSG === "ACT_ID_PW")

@@ -11,11 +11,30 @@ import React from 'react';
 
 const Header = () => {
 
+    
     function onclickHref (url, e)
     {
         window.location.href = "http://localhost:3000/default/" + url;
     }
 
+    function checkLogin()
+    {
+        const IsLogin = sessionStorage.getItem("ISLOGIN");
+
+        var Tag_Login = document.getElementById("Tag_Login");
+        var Tag_Logout = document.getElementById("Tag_Login");
+        if(IsLogin == "OK") 
+        {   
+           
+        }
+        else
+        {
+           
+        }
+
+    }
+
+  
 
     return (
 
@@ -38,7 +57,8 @@ const Header = () => {
                 <nav className={styles.con_NavBar}>
                     <ul className={styles.nav_ul}>
                        <Link to="/default/login" className={styles.nav_link}>
-                            <li className={styles.nav_li}>로그인</li>
+                            <li id="Tag_Login" className={styles.nav_li}>로그인</li>
+                            
                        </Link> 
                        <Link to="/default/signup" className={styles.nav_link}>
                             <li className={styles.nav_li}>회원가입</li>
@@ -47,7 +67,11 @@ const Header = () => {
                 </nav>
            </div>
         </header>
+        
+        
     )
+
+    
 }
 
 export default Header

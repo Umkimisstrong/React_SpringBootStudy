@@ -218,7 +218,7 @@ public class AccountController {
         return result;
     }
 
-    /// 설명 : 계정 중복여부 반환 API
+    /// 설명 : 계정 로그인 API
     @GetMapping("/api/account/select_account_login")
     public HashMap<String, Object> SelectAccountLogin(
                                                         String Account_ID       // 계정 ID
@@ -237,6 +237,15 @@ public class AccountController {
         AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
         
         resultAccountEntity = mapper.selectAccountLogin(request);
+        
+        // 계정 로그인 성공 시 로그인 한 ID 정보 조회하여 전달
+        if(resultAccountEntity.ACT_FLAG.equals("OK"))
+        {
+            String ACT_FLAG = resultAccountEntity.ACT_FLAG;
+            resultAccountEntity = mapper.selectAccountEntity(request);
+            resultAccountEntity.ACT_FLAG = ACT_FLAG;
+        }
+
 
         result.put("AccountEntity", resultAccountEntity);    
         return result;

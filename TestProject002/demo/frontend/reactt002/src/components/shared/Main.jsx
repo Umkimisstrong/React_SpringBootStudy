@@ -19,6 +19,8 @@ import styles from "../../components/cssModule/default/Main.module.css";
 
 const Main = () => {
 
+    
+
     return (
 
         <main className={styles.main}>
