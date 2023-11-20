@@ -22,5 +22,8 @@ public interface CodeMapper {
     // 코드 수정 : UP_CMM_Code_U
     public int updateCodeEntity(CodeModel codeModel);
 
+    // 코드 Text / Value 반환 : UP_CMM_Code_Value_L
+    public ArrayList<CodeEntity> selectCodeValueList(CodeModel codeModel);
+
 
 }

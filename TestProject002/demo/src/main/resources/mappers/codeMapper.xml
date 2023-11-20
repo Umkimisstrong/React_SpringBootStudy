@@ -49,6 +49,19 @@
         }
     </select>
 
+    <!-- UP_CMM_Code_Value_L -->
+    <select id="selectCodeValueList" 
+            parameterType="com.example.model.CodeModel"
+            resultType="com.example.entity.CodeEntity"
+            statementType="CALLABLE">
+        {
+                call UP_CMM_Code_Value_L
+                (
+                    #{Parent_Code_ID}
+                )
+        }
+    </select>
+
     <!-- UP_CMM_Code_C -->
     <insert id="createCodeEntity" 
             parameterType="com.example.model.CodeModel"

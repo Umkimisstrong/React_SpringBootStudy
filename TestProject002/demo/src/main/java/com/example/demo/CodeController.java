@@ -70,6 +70,29 @@ public class CodeController {
         return result;
     }
 
+    /// 설명 : 코드 Text / Value 반환 API
+    @GetMapping("/api/code/select_code_value_list")
+    public HashMap<String, Object> SelectCodeValueList(
+                                                            String Parent_Code_ID // 상위 코드 ID
+                                                       )  throws SQLException, ClassNotFoundException
+    {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        CodeModel request = new CodeModel();
+
+        request.Parent_Code_ID = Parent_Code_ID;
+        
+        List<CodeEntity> resultCodeValueList = new ArrayList<CodeEntity>();
+
+        CodeMapper mapper = sqlSession.getMapper(CodeMapper.class);
+
+        resultCodeValueList = mapper.selectCodeValueList(request);
+
+        result.put("CodeValueList", resultCodeValueList);    
+
+        return result;
+    }
+
     /// 설명 : 코드 생성 API
     @GetMapping("/api/code/create_code_entity")
     public HashMap<String, Object> CreateCodeEntity    (

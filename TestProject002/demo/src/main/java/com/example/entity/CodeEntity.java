@@ -35,5 +35,10 @@ public class CodeEntity extends CommonEntity {
     // 정렬
     public int Sort_Order;
 
+    // 텍스트 필드
+    public String Text_Filed;
+
+    // 밸류 필드
+    public String Value_Filed;
     
 }

@@ -4,14 +4,162 @@
 
 import React from 'react';
 import styles from "../../components/cssModule/recipe/RecipeSave.module.css";
+import axios from "axios";
 
 
 
-
+    
 
 const RecipeSave = () => {
 
+
+    var amt =  [];
+    
+     /// 이름 : setTextValueData() 
+     /// 설명 : DropDownList 값 세팅
+     /// 비고 : 음식 전체 양, 조리 시간, 난이도
+     function setTextValueData() 
+     {
+
+        
+
+        getAmount();
+        getTime();
+        getDifficulty();
+       
+    }
+
+
+     /// 이름 : getAmount()
+     /// 설명 : 음식 전체 양 조회
+     /// 비고 : 음식 전체 양에 관련된 코드 조회
+     function getAmount()
+     {
+        var Code_Value_List = null;
+
+         try{
+             const response =  axios.get("http://localhost:8080/api/code/select_code_value_list", 
+             {
+                 headers: {
+                     'Access-Control-Allow-Origin': 'http://localhost:3000',
+                     'Access-Control-Allow-Methods': 'GET',
+                     'Access-Control-Allow-Headers': 'Content-Type',
+                 },
+                 params:{
+                         Parent_Code_ID  :   "RCP_Amount_CD"
+                 }
+             })
+              .then(res => {
+              
+                var arrTextFiled = [];
+                var arrValueFiled = [];
+                for(var i=0; i<res.data.CodeValueList.length;i++)
+                {
+                    arrTextFiled.push(res.data.CodeValueList[i].Text_Filed);
+                    arrValueFiled.push(res.data.CodeValueList[i].Value_Filed);
+                }
+
+
+                setValue(res.data.arrTextFiled);
+                 
+              
+             })
+              .catch(res => console.log(res));
+         }
+         catch(err)
+         {
+             alert("ERR" + err);
+         }
+        
+         
+
+     }
+
+     /// 이름 : getTime()
+     /// 설명 : 조리 시간 조회
+     /// 비고 : 음식 조리 시간과 관련된 코드 조회
+     function getTime()
+     {
+        var Code_Value_List = null;
+
+         try{
+             const response = axios.get("http://localhost:8080/api/code/select_code_value_list", 
+             {
+                 headers: {
+                     'Access-Control-Allow-Origin': 'http://localhost:3000',
+                     'Access-Control-Allow-Methods': 'GET',
+                     'Access-Control-Allow-Headers': 'Content-Type',
+                 },
+                 params:{
+                         Parent_Code_ID  :   "RCP_Time_CD"
+                 }
+             })
+              .then(res => {
+              
+                const Time_list = res.data.CodeValueList;
+                 
+              
+             })
+              .catch(res => console.log(res));
+         }
+         catch(err)
+         {
+             alert("ERR" + err);
+         }
+        
+         return Code_Value_List;
+
+     }
+
+     /// 이름 : getTime()
+     /// 설명 : 조리 시간 조회
+     /// 비고 : 음식 조리 시간과 관련된 코드 조회
+     function getDifficulty()
+     {
+        var Code_Value_List = null;
+
+         try{
+             const response = axios.get("http://localhost:8080/api/code/select_code_value_list", 
+             {
+                 headers: {
+                     'Access-Control-Allow-Origin': 'http://localhost:3000',
+                     'Access-Control-Allow-Methods': 'GET',
+                     'Access-Control-Allow-Headers': 'Content-Type',
+                 },
+                 params:{
+                         Parent_Code_ID  :   "RCP_Difficulty_CD"
+                 }
+             })
+              .then(res => {
+              
+                const Difficulty_list = res.data.CodeValueList;
+                 
+              
+             })
+              .catch(res => console.log(res));
+         }
+         catch(err)
+         {
+             alert("ERR" + err);
+         }
+        
+         return Code_Value_List;
+
+     }
+
+     function setValue(amt_value)
+     {
+        amt = amt_value;
+     }
+     
+     setTextValueData();
+     //setValue();
+
+
+
     return (
+
+        
         <div>
             {/* 검색 영역 */}
             {/* <div className={styles.recipe_save_search}>
@@ -112,11 +260,14 @@ const RecipeSave = () => {
                                 <th className={styles.recipe_save_tbl_th}>음식 전체 양 </th>
                                 <td>
                                      <select name="" id="" className={styles.recipe_save_select}>
+                                        {amt.map((item) => (
+                                            <option value="1">{item}</option>
+                                            ))}
                                             <option value="">1인분</option>
                                             <option value="">2인분</option>
                                             <option value="">3인분</option>
                                             <option value="">4인분</option>
-                                            <option value="">5인분</option>
+                                            <option value="">5인분</option> 
                                      </select> 
                                 </td>
 
