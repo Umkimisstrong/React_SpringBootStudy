@@ -2,7 +2,7 @@
     레시피 저장 화면
 */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from "../../components/cssModule/recipe/RecipeSave.module.css";
 import axios from "axios";
 
@@ -12,8 +12,58 @@ import axios from "axios";
 
 const RecipeSave = () => {
 
+    //var amt = ["1인분", "2인분", "3인분"];
+    var amt = [
+                {
+                     text : "1인분"
+                     , value : "RCP_Amount_CD_01"
+                }
+                ,
+                {
+                    text : "2인분"
+                    , value : "RCP_Amount_CD_02"
+                }
+                ,
+                {
+                    text : "3인분"
+                    , value : "RCP_Amount_CD_03"
+                }
+              ];
 
-    var amt =  [];
+    var time = [
+                {
+                     text : "5분"
+                     , value : "RCP_Time_CD_01"
+                }
+                ,
+                {
+                    text : "10분"
+                    , value : "RCP_Time_CD_02"
+                }
+                ,
+                {
+                    text : "15분"
+                    , value : "RCP_Time_CD_03"
+                }
+              ];              
+
+    var difficulty = [
+                {
+                     text : "아무나"
+                     , value : "RCP_Difficulty_CD_01"
+                }
+                ,
+                {
+                    text : "초급"
+                    , value : "RCP_Difficulty_CD_02"
+                }
+                ,
+                {
+                    text : "중급"
+                    , value : "RCP_Difficulty_CD_03"
+                }
+              ];                    
+        
     
      /// 이름 : setTextValueData() 
      /// 설명 : DropDownList 값 세팅
@@ -22,7 +72,7 @@ const RecipeSave = () => {
      {
 
         
-
+        //alert("2");
         getAmount();
         getTime();
         getDifficulty();
@@ -152,8 +202,48 @@ const RecipeSave = () => {
         amt = amt_value;
      }
      
-     setTextValueData();
-     //setValue();
+     function click_Toggle (e, name)
+     {
+        e.preventDefault();
+        
+        // 1. 클릭 시 해당 아이템이 선택되어있는지 체크
+        // 2. 선택되지 않았다면 진하게, 초록섹
+        // 3. 나머지 요소들은 기본으로
+         var target_element = document.getElementById(e.target.id);
+
+         if(target_element.style.fontWeight != 'bold')
+         {
+             target_element.style.fontWeight = 'bold';
+         }
+         else if(target_element.style.fontWeight == 'bold')
+         {
+            target_element.style.fontWeight = '';
+         }
+
+        if(target_element.style.color != 'green')
+        {
+            target_element.style.color = 'green';
+        }
+        else if(target_element.style.color == 'green')
+        {
+            target_element.style.color = '';
+        }
+
+
+        var arrTds = document.getElementsByName(name);
+
+        for(var i = 0; i<arrTds.length; i++)
+        {
+            if(arrTds[i].id != e.target.id)
+            {
+                arrTds[i].style.color = '';
+                arrTds[i].style.fontWeight = '';
+            }
+        }
+     }
+
+    setTextValueData();
+    
 
 
 
@@ -193,50 +283,49 @@ const RecipeSave = () => {
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>종류별 </th>
 
-
-                                <td>밑반찬</td>
-                                <td>메인반찬</td>
-                                <td>국 / 탕 / 찌개</td>
-                                <td>디저트</td>
+                                <td><span name="RCP_DishType_CD" id="RCP_DishType_CD_01" onClick={ (e) => click_Toggle(e, "RCP_DishType_CD")}>밑반찬</span></td>
+                                <td><span name="RCP_DishType_CD" id="RCP_DishType_CD_02" onClick={ (e) => click_Toggle(e, "RCP_DishType_CD")}>메인반찬</span></td>
+                                <td><span name="RCP_DishType_CD" id="RCP_DishType_CD_03" onClick={ (e) => click_Toggle(e, "RCP_DishType_CD")}>국/탕</span></td>
+                                <td><span name="RCP_DishType_CD" id="RCP_DishType_CD_04" onClick={ (e) => click_Toggle(e, "RCP_DishType_CD")}>디저트</span></td>
                             </tr>
 
                             <tr>
-                            <th className={styles.recipe_save_tbl_th}>상황별 </th>
+                                <th className={styles.recipe_save_tbl_th}>상황별 </th>
 
+                                <td><span name="RCP_Situation_CD" id="RCP_Situation_CD_01" onClick={ (e) => click_Toggle(e, "RCP_Situation_CD")}>일상</span></td>
+                                <td><span name="RCP_Situation_CD" id="RCP_Situation_CD_02" onClick={ (e) => click_Toggle(e, "RCP_Situation_CD")}>초스피드</span></td>
+                                <td><span name="RCP_Situation_CD" id="RCP_Situation_CD_03" onClick={ (e) => click_Toggle(e, "RCP_Situation_CD")}>손님접대</span></td>
+                                <td><span name="RCP_Situation_CD" id="RCP_Situation_CD_04" onClick={ (e) => click_Toggle(e, "RCP_Situation_CD")}>술안주</span></td>
 
-                                <td>술안주</td>
-                                <td>다이어트</td>
-                                <td>일상</td>
-                                <td>초스피드</td>
                             </tr>
 
                             <tr>
-                            <th className={styles.recipe_save_tbl_th}>메인 재료별 </th>
+                                <th className={styles.recipe_save_tbl_th}>메인 재료별 </th>
 
 
-                                <td>소고기</td>
-                                <td>돼지고기</td>
-                                <td>닭고기</td>
-                                <td>육류</td>
+                                <td><span name="RCP_Main_Ingredients_CD" id="RCP_Main_Ingredients_CD_01" onClick={ (e) => click_Toggle(e, "RCP_Main_Ingredients_CD")}>소고기</span></td>
+                                <td><span name="RCP_Main_Ingredients_CD" id="RCP_Main_Ingredients_CD_02" onClick={ (e) => click_Toggle(e, "RCP_Main_Ingredients_CD")}>돼지고기</span></td>
+                                <td><span name="RCP_Main_Ingredients_CD" id="RCP_Main_Ingredients_CD_03" onClick={ (e) => click_Toggle(e, "RCP_Main_Ingredients_CD")}>닭고기</span></td>
+                                <td><span name="RCP_Main_Ingredients_CD" id="RCP_Main_Ingredients_CD_04" onClick={ (e) => click_Toggle(e, "RCP_Main_Ingredients_CD")}>육류</span></td>
                             </tr>
 
                             <tr>
-                            <th className={styles.recipe_save_tbl_th}>방법별 </th>
+                                <th className={styles.recipe_save_tbl_th}>방법별 </th>
 
 
-                                <td>볶음</td>
-                                <td>끓이기</td>
-                                <td>부침</td>
-                                <td>조림</td>
+                                <td><span name="RCP_Method_CD" id="RCP_Method_CD_01" onClick={ (e) => click_Toggle(e, "RCP_Method_CD")}>볶음</span></td>
+                                <td><span name="RCP_Method_CD" id="RCP_Method_CD_02" onClick={ (e) => click_Toggle(e, "RCP_Method_CD")}>끓이기</span></td>
+                                <td><span name="RCP_Method_CD" id="RCP_Method_CD_03" onClick={ (e) => click_Toggle(e, "RCP_Method_CD")}>부침</span></td>
+                                <td><span name="RCP_Method_CD" id="RCP_Method_CD_04" onClick={ (e) => click_Toggle(e, "RCP_Method_CD")}>조림</span></td>
                             </tr>
 
                             <tr>
-                            <th className={styles.recipe_save_tbl_th}>테마별 </th>
+                                <th className={styles.recipe_save_tbl_th}>테마별 </th>
 
-                                <td>여성 / 뷰티</td>
-                                <td>엄마 / 아기</td>
-                                <td>건강 / 질병</td>
-                                <td>제철요리</td>
+                                <td><span name="RCP_Theme_CD" id="RCP_Theme_CD_01" onClick={ (e) => click_Toggle(e, "RCP_Theme_CD")}>여성/뷰티</span></td>
+                                <td><span name="RCP_Theme_CD" id="RCP_Theme_CD_02" onClick={ (e) => click_Toggle(e, "RCP_Theme_CD")}>엄마/아기</span></td>
+                                <td><span name="RCP_Theme_CD" id="RCP_Theme_CD_03" onClick={ (e) => click_Toggle(e, "RCP_Theme_CD")}>건강/질병</span></td>
+                                <td><span name="RCP_Theme_CD" id="RCP_Theme_CD_04" onClick={ (e) => click_Toggle(e, "RCP_Theme_CD")}>기타</span></td>
                             </tr>
 
 
@@ -259,15 +348,11 @@ const RecipeSave = () => {
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>음식 전체 양 </th>
                                 <td>
-                                     <select name="" id="" className={styles.recipe_save_select}>
+                                     <select name="amt" id="amt" className={styles.recipe_save_select}>
                                         {amt.map((item) => (
-                                            <option value="1">{item}</option>
+                                            <option key={item.value} value={item.value}>{item.text}</option>
                                             ))}
-                                            <option value="">1인분</option>
-                                            <option value="">2인분</option>
-                                            <option value="">3인분</option>
-                                            <option value="">4인분</option>
-                                            <option value="">5인분</option> 
+                                             
                                      </select> 
                                 </td>
 
@@ -281,12 +366,10 @@ const RecipeSave = () => {
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>조리 시간 </th>
                                 <td>
-                                    <select name="" id="" className={styles.recipe_save_select}>
-                                            <option value="">10분 이내</option>
-                                            <option value="">30분 이내</option>
-                                            <option value="">1시간 이내</option>
-                                            <option value="">2시간 이내</option>
-                                            <option value="">3시간 이상</option>
+                                    <select name="time" id="time" className={styles.recipe_save_select}>
+                                    {time.map((item) => (
+                                            <option key={item.value} value={item.value}>{item.text}</option>
+                                            ))}
                                      </select> 
                                 </td>
 
@@ -299,11 +382,10 @@ const RecipeSave = () => {
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>난이도 </th>
                                 <td colSpan="4"> 
-                                    <select name="" id="" className={styles.recipe_save_select}>
-                                            <option value="">초급</option>
-                                            <option value="">중급</option>
-                                            <option value="">고급</option>
-                                            <option value="">쉐프</option>
+                                    <select name="difficulty" id="difficulty" className={styles.recipe_save_select}>
+                                    {difficulty.map((item) => (
+                                            <option key={item.value} value={item.value}>{item.text}</option>
+                                            ))}
                                      </select> 
                                 </td>
                             </tr>
@@ -404,62 +486,122 @@ const RecipeSave = () => {
 
             {/* 단계 영역 */}
             <div>
-                <div  className={styles.recipe_save_step_wrap}>
-                <div className={styles.recipe_save_label_wrap}>
-                    4. 레시피 단계 등록하기
-                </div>
-                    <div className={styles.recipe_save_contents}>
-                        <div className={styles.recipe_save_contents_plus_step}>
-                            <input type="button" value="단계 추가" className={styles.recipe_save_step_plus_btn}/>
-                        </div>
-                        <table>
-                            <thead>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                         <div className={styles.recipe_save_step_div}> 
-                                        STEP 1
-                                        </div>
-                                    </th>
-                                    <td><input type="button" value="지우기" className={styles.recipe_save_step_delete_btn}/></td>
-                                </tr>
+                <div  className={styles.recipe_save_step_wrap} >
+                    <div className={styles.recipe_save_label_wrap}>
+                        4. 레시피 단계 등록하기
+                    </div>
 
-                                <tr>
-                                    <td><input type="text" placeholder='재료명' className={styles.recipe_save_step_ingd_input}/></td>
-                                    <td><input type="text" placeholder='수량' className={styles.recipe_save_step_ingd_amt_input}/></td>
-                                    <td><input type="text" placeholder='단위' className={styles.recipe_save_step_ingd_ea_input}/></td>
+                    <div id="step_list">
 
-                                    <td>                                       
-                                    </td>
-
-                                    <td><input type="text" placeholder='도구명' className={styles.recipe_save_step_equip_input}/></td>
-                                    <td><input type="text" placeholder='단위' className={styles.recipe_save_step_equip_amt_input}/></td>
-                                    <td>
-                                        <input type="button" value="+" className={styles.recipe_save_step_ingd_plus_btn}/>
-                                    </td>
-
-                                    <td>                                       
-                                    </td>
-
-                                    <td rowSpan="2">
-                                        <div className={styles.recipe_save_step_sumnail_div}>
-                                            <div>
-                                                +
-                                                <br></br>
-                                                단계를 설명하는 사진
+                        <div className={styles.recipe_save_contents} id="step_01">
+                            <div className={styles.recipe_save_contents_plus_step}>
+                                <input type="button" value="단계 추가" className={styles.recipe_save_step_plus_btn}/>
+                            </div>
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <div className={styles.recipe_save_step_div}> 
+                                            STEP 1
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2"><input type="text" placeholder='단계 제목' className={styles.recipe_save_step_title_input}/></td>
-                                    <td colSpan="4"><input type="text" placeholder='팁' className={styles.recipe_save_step_tip_input}/></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </th>
+                                        <td><input type="button" value="지우기" className={styles.recipe_save_step_delete_btn}/></td>
+                                    </tr>
 
-                    </div> 
+                                    <tr>
+                                        <td><input type="text" placeholder='재료명' className={styles.recipe_save_step_ingd_input}/></td>
+                                        <td><input type="text" placeholder='수량' className={styles.recipe_save_step_ingd_amt_input}/></td>
+                                        <td><input type="text" placeholder='단위' className={styles.recipe_save_step_ingd_ea_input}/></td>
+
+                                        <td>                                       
+                                        </td>
+
+                                        <td><input type="text" placeholder='도구명' className={styles.recipe_save_step_equip_input}/></td>
+                                        <td><input type="text" placeholder='단위' className={styles.recipe_save_step_equip_amt_input}/></td>
+                                        <td>
+                                            <input type="button" value="+" className={styles.recipe_save_step_ingd_plus_btn}/>
+                                        </td>
+
+                                        <td>                                       
+                                        </td>
+
+                                        <td rowSpan="2">
+                                            <div className={styles.recipe_save_step_sumnail_div}>
+                                                <div>
+                                                    +
+                                                    <br></br>
+                                                    단계를 설명하는 사진
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="2"><input type="text" placeholder='단계 제목' className={styles.recipe_save_step_title_input}/></td>
+                                        <td colSpan="4"><input type="text" placeholder='팁' className={styles.recipe_save_step_tip_input}/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                        {/* 반복 */}
+
+                        <div className={styles.recipe_save_contents} id="step_02">
+                            <div className={styles.recipe_save_contents_plus_step}>
+                                <input type="button" value="단계 추가" className={styles.recipe_save_step_plus_btn}/>
+                            </div>
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <div className={styles.recipe_save_step_div}> 
+                                            STEP 1
+                                            </div>
+                                        </th>
+                                        <td><input type="button" value="지우기" className={styles.recipe_save_step_delete_btn}/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><input type="text" placeholder='재료명' className={styles.recipe_save_step_ingd_input}/></td>
+                                        <td><input type="text" placeholder='수량' className={styles.recipe_save_step_ingd_amt_input}/></td>
+                                        <td><input type="text" placeholder='단위' className={styles.recipe_save_step_ingd_ea_input}/></td>
+
+                                        <td>                                       
+                                        </td>
+
+                                        <td><input type="text" placeholder='도구명' className={styles.recipe_save_step_equip_input}/></td>
+                                        <td><input type="text" placeholder='단위' className={styles.recipe_save_step_equip_amt_input}/></td>
+                                        <td>
+                                            <input type="button" value="+" className={styles.recipe_save_step_ingd_plus_btn}/>
+                                        </td>
+
+                                        <td>                                       
+                                        </td>
+
+                                        <td rowSpan="2">
+                                            <div className={styles.recipe_save_step_sumnail_div}>
+                                                <div>
+                                                    +
+                                                    <br></br>
+                                                    단계를 설명하는 사진
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="2"><input type="text" placeholder='단계 제목' className={styles.recipe_save_step_title_input}/></td>
+                                        <td colSpan="4"><input type="text" placeholder='팁' className={styles.recipe_save_step_tip_input}/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    
+
+
                 </div>  
             </div>
 
