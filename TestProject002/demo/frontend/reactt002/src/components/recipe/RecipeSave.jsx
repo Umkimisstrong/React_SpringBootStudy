@@ -12,7 +12,7 @@ import axios from "axios";
 
 const RecipeSave = () => {
 
-    //var amt = ["1인분", "2인분", "3인분"];
+    // 음식 양 관련된 배열
     var amt = [
                 {
                      text : "1인분"
@@ -30,6 +30,7 @@ const RecipeSave = () => {
                 }
               ];
 
+    // 조리 시간 관련된 배열
     var time = [
                 {
                      text : "5분"
@@ -47,6 +48,7 @@ const RecipeSave = () => {
                 }
               ];              
 
+    // 난인도 관련된 배열              
     var difficulty = [
                 {
                      text : "아무나"
@@ -110,7 +112,6 @@ const RecipeSave = () => {
                 }
 
 
-                setValue(res.data.arrTextFiled);
                  
               
              })
@@ -197,12 +198,11 @@ const RecipeSave = () => {
 
      }
 
-     function setValue(amt_value)
-     {
-        amt = amt_value;
-     }
-     
-     // 레시피 키워드 체크하기
+
+     /// 이름 : click_Toggle(e, name)
+     /// 설명 : 레시피 키워드 선택
+     /// 비고 : 키워드 5개 중 한개 선택 시 글자색 초록색, 진하게 하고
+     //         나머지는 검정, 연하게
      function click_Toggle (e, name)
      {
         e.preventDefault();
@@ -244,7 +244,10 @@ const RecipeSave = () => {
      }
 
 
-     // 레시피 단계 추가하기
+     /// 이름 : add_Step_Toggle(e, name)
+     /// 설명 : 단계 추가하기
+     /// 비고 : 레시피 단계를 추가하는 버튼 클릭 시 같은 단계 입력폼 생성, 인덱스 증가
+     //         지우기 버튼에 삭제 함수 등록
      function add_Step_Toggle(e, name)
      {
         e.preventDefault();
@@ -282,9 +285,140 @@ const RecipeSave = () => {
      }  
 
     
+     function check_Data(e, saveFlag)
+     {
+        e.preventDefault();
+
+
+        var key = check_Keyword();
+        var drop = check_DropDown();
+        var text = check_TextBox();
+        var step = check_Step();
+
+        if(!key || !drop || !text || !step)
+            return false;
+
+        
+
+     }
  
-    setTextValueData();
-    
+
+     function check_Keyword()
+     {
+        var flag = false;
+
+        // 종류별 키워드
+        var arrDishType = document.getElementsByName("RCP_DishType_CD");
+        for(var i = 0; i<arrDishType.length; i++)
+        {
+            if(arrDishType[i].style.fontWeight == 'bold' && arrDishType[i].style.color == 'green')
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if(!flag)
+        {
+            alert("종류별 키워드를 선택하세요");
+            document.getElementById("RCP_DishType_CD_01").focus();
+            return;
+        }
+        
+        flag = false;
+
+        // 상황별 키워드
+        var arrSituation = document.getElementsByName("RCP_Situation_CD");
+        for(var i = 0; i<arrSituation.length; i++)
+        {
+            if(arrSituation[i].style.fontWeight == 'bold' && arrSituation[i].style.color == 'green')
+            {
+                flag = true;
+                break;
+            }
+        }
+        if(!flag)
+        {
+            alert("상황별 키워드를 선택하세요");
+            return;
+        }
+        
+        flag = false;
+        
+        // 메인 재료별 키워드
+        var arrMain = document.getElementsByName("RCP_Main_Ingredients_CD");
+        for(var i = 0; i<arrMain.length; i++)
+        {
+            if(arrMain[i].style.fontWeight == 'bold' && arrMain[i].style.color == 'green')
+            {
+                flag = true;
+                break;
+            }
+        }
+        if(!flag)
+        {
+            alert("메인 재료별 키워드를 선택하세요");
+            return;
+        }
+        
+        flag = false;
+
+        // 방법별 키워드
+        var arrMethod = document.getElementsByName("RCP_Method_CD");
+        for(var i = 0; i<arrMethod.length; i++)
+        {
+            if(arrMethod[i].style.fontWeight == 'bold' && arrMethod[i].style.color == 'green')
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if(!flag)
+        {
+            alert("방법별 키워드를 선택하세요");
+            return;
+        }
+        
+        flag = false;
+
+        // 테마별 키워드
+        var arrTheme = document.getElementsByName("RCP_Theme_CD");
+        for(var i = 0; i<arrTheme.length; i++)
+        {
+            if(arrTheme[i].style.fontWeight == 'bold' && arrTheme[i].style.color == 'green')
+            {
+                flag = true;
+                break;
+            }
+        }
+
+        if(!flag)
+        {
+            alert("테마별 키워드를 선택하세요");
+            return;
+        }
+        
+
+        return flag;
+     }
+
+     function check_DropDown()
+     {
+        return true;
+     }
+
+     function check_TextBox()
+     {
+
+        return true;
+     }
+
+     function check_Step()
+     {
+
+        return true;
+     }
 
 
 
@@ -604,8 +738,8 @@ const RecipeSave = () => {
             {/* 버튼 영역 */}
             <div className={styles.recipe_save_btn_wrap}>
                 <div>
-                    <input type="button"  value="공개" className={styles.recipe_save_open_btn}/>
-                    <input type="button"  value="저장"  className={styles.recipe_save_btn}/>
+                    <input type="button"  value="공개" className={styles.recipe_save_open_btn} onClick={(e) => check_Data(e, 'open')}/>
+                    <input type="button"  value="저장"  className={styles.recipe_save_btn} onClick={(e) => check_Data(e, 'save')}/>
                 </div>
             </div>
 
