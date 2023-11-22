@@ -252,22 +252,35 @@ const RecipeSave = () => {
      {
         e.preventDefault();
 
-        // 추가 할 HTML 을 추출
-        var strHTML = document.getElementById(name).children[0].outerHTML;
+        // 1. 추가 할 HTML 을 추출 (특정 포맷으로 숨겨져 있다. id = step_div_format)
+        var strHTML = document.getElementById('step_div_format').children[0];
 
-        // 기존 HTML 추출
-        var allHTML = document.getElementById(name).innerHTML;
+        // 2. 더해지기 전 HTML 추출(최초는 1개이지만 많이 추가하고 나면 5개인 덩어리일수도있다.)
+        var allHTML = document.getElementById(name);
 
-        // 기존 HTML 에 더해주고
-        var allHTML = allHTML + strHTML;
+        // 3. 더해지기전 HTML 에 마지막 자식으로 append 한다. HTML 에서 추출한 내용을 append 하면 기존 내용은 사라진다..
 
-        // 전체 HTML 에 덮어쓰기
-        document.getElementById(name).innerHTML = allHTML;
+        //  [div]   -- allHTML
+        //          // 자식 1
+        //          // 자식 2
+        //          // 자식 3       기존 3개의 자식이 있다면       
+        //          -----------------------
+        //          // 자식 4       strHTML ( allHTML 이라는 최상위 태그에 append 할시 가장 마지막 노드로 추가된다.)
+        //  [div]
+        allHTML.append(strHTML);
 
-        // 변해야할 Index 값들 정리
-        // STEP 1 라벨
-        // table id
-        // 지우기(제거 함수) 바인딩
+
+        // 4. append 하고 나면 추출한 format 은 사라진다..(1회용) 따라서 다음에 추가하기 위한 연료로 되어주어야 할 곳에 다시 넣어준다.
+        var strOuterHTML = strHTML.outerHTML;
+        document.getElementById('step_div_format').innerHTML = strOuterHTML;
+
+        
+        
+
+        // 4. 변해야할 Index 값들 정리
+        //    01. STEP 1 라벨 변경
+        //    02. table id 부여
+        //    03. 지우기(제거 함수) 바인딩
         for(var i=0; i<document.getElementById(name).children.length; i++)
         {
             document.getElementById(name).children[i].id = 'step_table_' + (i+1);
@@ -276,7 +289,7 @@ const RecipeSave = () => {
             document.getElementById("step_div").children[i].children[1].children[0].children[1].children[0].setAttribute
             (
                 "onclick", 
-                "function remove () { var tableHtmlObj = document.getElementsByName('step_table'); if(tableHtmlObj.length==1) return; else { var htmlObj = document.getElementById('step_table_"+(i+1)+"');  htmlObj.outerHTML='';  tableHtmlObj2 = document.getElementsByName('step_table'); for(var i=0; i<tableHtmlObj2.length;i++) { tableHtmlObj2[i].children[1].children[0].children[0].children[0].innerText = 'STEP ' + (i+1); }}}  remove();"
+                "function remove () { var tableHtmlObj = document.getElementById('step_div').children; if(tableHtmlObj.length==1) return; else { var htmlObj = document.getElementById('step_table_"+(i+1)+"');  htmlObj.outerHTML='';  tableHtmlObj2 = document.getElementById('step_div').children; for(var i=0; i<tableHtmlObj2.length;i++) { tableHtmlObj2[i].children[1].children[0].children[0].children[0].innerText = 'STEP ' + (i+1); }}}  remove();"
                 // 지우기 함수에는 최초 STEP 갯수를 검증하고, 1개 초과인 경우만 삭제, 삭제하고 나면 다시 STEP 라벨 재바인딩
             );
         }
@@ -285,20 +298,40 @@ const RecipeSave = () => {
      }  
 
     
+     /// 이름 : check_Data(e, saveFlag)
+     /// 설명 : 공개, 저장 버튼 클릭시 유효성 검사 시작 및 데이터 저장 함수
+     /// 비고 : 공개, 저장 여부에 따른 데이터 조작 필요
      function check_Data(e, saveFlag)
      {
         e.preventDefault();
 
-
+        // 1. keyword 검사
         var key = check_Keyword();
-        var drop = check_DropDown();
-        var text = check_TextBox();
-        var step = check_Step();
+        if(!key)
+            return;
 
+        // 2. DropDown 요소 검사
+        var drop = check_DropDown();
+        if(!drop)
+            return;
+
+        // 3. textBox 검사
+        var text = check_TextBox();
+        if(!text)
+            return;
+
+        // 4. 단계 내용 입력여부 검사
+        var step = check_Step();
+        if(!step)
+            return;
+
+        // 5. 하나라도 false 인 경우 return
         if(!key || !drop || !text || !step)
-            return false;
+            return;
 
         
+        // 6. ToDo : 데이터 저장 로직 (객체 바인딩 및 Axios 호출)
+        // 레시피관련정보, 레시피 단계정보
 
      }
  
@@ -405,19 +438,93 @@ const RecipeSave = () => {
 
      function check_DropDown()
      {
+        if(document.getElementById('amt').value == '')
+        {
+            alert("음식 조리 양을 선택하세요");
+            return false;
+        }
+        if(document.getElementById('time').value == '')
+        {
+            alert("음식 조리 시간을 선택하세요");
+            return false;
+        }
+        if(document.getElementById('difficulty').value == '')
+        {
+            alert("음식 조리 시간을 선택하세요");
+            return false;
+        }
+
         return true;
      }
 
      function check_TextBox()
      {
+        var info_ingredient = document.getElementById("info_ingredient").value;
+        if(info_ingredient.trim() == '')
+        {
+            alert("레시피 재료를 입력하세요");
+            return false;
+        }
+
+        var info_equipment = document.getElementById("info_equipment").value;
+        if(info_equipment.trim() == '')
+        {
+            alert("레시피 도구를 입력하세요");
+            return false;
+        }
+        
+
+        var info_title = document.getElementById("info_title").value;
+        if(info_title.trim() == '')
+        {
+            alert("레시피 제목을 입력하세요");
+            return false;
+        }
+        
+        var info_description = document.getElementById("info_description").value;
+        if(info_description.trim() == '')
+        {
+            alert("레시피 설명을 입력하세요");
+            return false;
+        }
 
         return true;
      }
 
      function check_Step()
      {
+        var flag = true;
+        var step_table_elements = document.getElementById("step_div").children;
+        for(var i = 0; i<step_table_elements.length; i++)
+        {
+            // table            >   tbody   >   tr      
+            if(
+                step_table_elements[i].children[1].children[1].children[0].querySelector('input').value == ''
+                ||
+                step_table_elements[i].children[1].children[1].children[1].querySelector('input').value == '' 
+                ||
+                step_table_elements[i].children[1].children[1].children[2].querySelector('input').value == '' 
+                ||
+                step_table_elements[i].children[1].children[1].children[4].querySelector('input').value == '' 
+                ||
+                step_table_elements[i].children[1].children[1].children[5].querySelector('input').value == '' 
+                ||
+                step_table_elements[i].children[1].children[2].children[0].querySelector('input').value == '' 
+                ||
+                step_table_elements[i].children[1].children[2].children[1].querySelector('input').value == '' 
+              )
+              {
+                flag = false;
+                break;
+              }
+        }
 
-        return true;
+        if(flag == false)
+        {
+            alert("레시피 단계에 작성해야 할 내용을 입력하세요");
+        }
+
+        return flag;
      }
 
 
@@ -535,7 +642,7 @@ const RecipeSave = () => {
                                 
                                 
                                 <th className={styles.recipe_save_tbl_th_2}> 재료 </th>
-                                <td> <input type="text"  className={styles.recipe_save_input_ingredient_and_equip}/> </td>
+                                <td> <input type="text" id="info_ingredient" className={styles.recipe_save_input_ingredient_and_equip}/> </td>
                             </tr>
 
                             <tr>
@@ -551,7 +658,7 @@ const RecipeSave = () => {
                                 <td className={styles.recipe_save_tbl_blank_td}></td>
 
                                 <th className={styles.recipe_save_tbl_th_2}>도구 </th>
-                                <td> <input type="text" className={styles.recipe_save_input_ingredient_and_equip} /> </td>
+                                <td> <input type="text" id="info_equipment" className={styles.recipe_save_input_ingredient_and_equip} /> </td>
                             </tr>
 
                             <tr>
@@ -567,13 +674,13 @@ const RecipeSave = () => {
 
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>레시피 제목 </th>
-                                <td colSpan="4"> <input type="text" className={styles.recipe_save_input_title_and_description}/> </td>
+                                <td colSpan="4"> <input type="text" id="info_title" className={styles.recipe_save_input_title_and_description}/> </td>
                                 
                             </tr>
 
                             <tr>
                                 <th className={styles.recipe_save_tbl_th}>레시피 설명 </th>
-                                <td colSpan="4"> <input type="text" className={styles.recipe_save_input_title_and_description} /> </td>
+                                <td colSpan="4"> <input type="text" id="info_description" className={styles.recipe_save_input_title_and_description} /> </td>
                             </tr>
 
 
@@ -672,6 +779,57 @@ const RecipeSave = () => {
                             <div className={styles.recipe_save_contents_plus_step}>
                                 <input type="button" value="단계 추가" className={styles.recipe_save_step_plus_btn} onClick={(e) => add_Step_Toggle(e, "step_div")}/>
                             </div>
+
+                            <div id="step_div_format" className={styles.recipe_save_div_display_none}>
+                                <table name="step_table" id="step_table_0">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <div className={styles.recipe_save_step_div}> 
+                                                STEP 1
+                                                </div>
+                                            </th>
+                                            <td>
+                                                <input type="button" value="지우기" className={styles.recipe_save_step_delete_btn} />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><input type="text" placeholder='재료명' className={styles.recipe_save_step_ingd_input}/></td>
+                                            <td><input type="text" placeholder='수량' className={styles.recipe_save_step_ingd_amt_input}/></td>
+                                            <td><input type="text" placeholder='단위' className={styles.recipe_save_step_ingd_ea_input}/></td>
+
+                                            <td>                                       
+                                            </td>
+
+                                            <td><input type="text" placeholder='도구명' className={styles.recipe_save_step_equip_input}/></td>
+                                            <td><input type="text" placeholder='단위' className={styles.recipe_save_step_equip_amt_input}/></td>
+                                            <td>
+                                                <input type="button" value="+" className={styles.recipe_save_step_ingd_plus_btn}/>
+                                            </td>
+
+                                            <td>                                       
+                                            </td>
+
+                                            <td rowSpan="2">
+                                                <div className={styles.recipe_save_step_sumnail_div}>
+                                                    <div>
+                                                        +
+                                                        <br></br>
+                                                        단계를 설명하는 사진
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="2"><input type="text" placeholder='단계 제목' className={styles.recipe_save_step_title_input}/></td>
+                                            <td colSpan="4"><input type="text" placeholder='팁' className={styles.recipe_save_step_tip_input}/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>               
 
                             <div id="step_div">
                                 <table name="step_table" id="step_table_1">

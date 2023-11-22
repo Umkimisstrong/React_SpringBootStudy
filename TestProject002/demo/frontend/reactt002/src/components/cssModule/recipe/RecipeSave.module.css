@@ -99,3 +99,5 @@
     /* background-color: #fff8de;     */
     margin-bottom: 100px;
     border-radius: 20px; height: auto;  padding-top: 5px; padding-bottom: 5px; }
+
+.recipe_save_div_display_none {display: none;}    
