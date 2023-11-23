@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface StepMapper {
 
     // 단계 생성 : UP_RCP_Step_C
-    public int createStep(StepEntity stepEntity);
+    public StepEntity createStep(StepEntity stepEntity);
 
     // 단계 삭제 : UP_RCP_Step_D
     public int deleteStep(StepModel stepModel);

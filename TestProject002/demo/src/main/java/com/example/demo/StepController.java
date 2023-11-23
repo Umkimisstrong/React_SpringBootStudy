@@ -74,17 +74,14 @@ public class StepController {
         request.Login_User_ID       = "System";
    
    
-        
-        int INSERT_RESULT = 0;
+        StepEntity resultEntity = new StepEntity();
 
         StepMapper mapper = sqlSession.getMapper(StepMapper.class);
-        INSERT_RESULT = mapper.createStep(request);
+        resultEntity = mapper.createStep(request);
 
-        Boolean ISRESULT = false;
-        if(INSERT_RESULT>0)
-            ISRESULT = true;
 
-        result.put(BOOLEAN_RESULT, ISRESULT);
+
+        result.put("StepEntity", resultEntity);
 
         return result;
     }

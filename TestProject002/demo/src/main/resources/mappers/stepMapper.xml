@@ -39,8 +39,9 @@
     </select>
 
     <!-- UP_RCP_Step_C -->
-    <insert id="createStep" 
+    <select id="createStep" 
             parameterType="com.example.entity.StepEntity"
+            resultType="com.example.entity.StepEntity"
             statementType="CALLABLE">
         {
                 call UP_RCP_Step_C
@@ -55,7 +56,7 @@
                     , #{Login_User_ID}
 	            )
         }
-    </insert>
+    </select>
 
     <!-- UP_RCP_Step_D -->
     <delete id="deleteStep" 

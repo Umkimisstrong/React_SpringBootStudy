@@ -81,6 +81,279 @@ const RecipeSave = () => {
        
     }
 
+    /// 이름 : Recipe 저장 비동기 함수
+    /// 설명 : 레시피 정보 전달 하여 ID 반환
+    /// 비고 : 각종 파라미터 전달
+    async function saveRecipe(
+                          rcp_title, rcp_contents, rcp_amount_cd, rcp_time_cd, rcp_difficulty_cd
+                        , rcp_dishtype_cd, rcp_situation_cd, rcp_main_ingredients_cd, rcp_method_cd
+                        , rcp_theme_cd, open_yn
+                        )
+     {
+        var RCP_ID = '';
+        try{
+            const response =  await axios.get("http://localhost:8080/api/rcp/create_recipe_entity", 
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                params:{
+                      RCP_Title                   : rcp_title
+                    , RCP_Contents                : rcp_contents
+                    , RCP_Amount_CD               : rcp_amount_cd
+                    , RCP_Time_CD	              : rcp_time_cd
+                    , RCP_Difficulty_CD           : rcp_difficulty_cd
+                    , RCP_DishType_CD             : rcp_dishtype_cd
+                    , RCP_Situation_CD            : rcp_situation_cd
+                    , RCP_Main_Ingredients_CD     : rcp_main_ingredients_cd
+                    , RCP_Method_CD               : rcp_method_cd
+                    , RCP_Theme_CD                : rcp_theme_cd
+                    , Open_YN                     : open_yn
+                }
+            })
+             .then(res => {
+             
+                //console.log(res.data.RecipeEntity);
+                RCP_ID = res.data.RecipeEntity.RCP_ID;
+
+
+                if(RCP_ID != '')
+                {
+                
+                    
+                    
+                    // 레시피의 재료
+                    var info_ingredient = document.getElementById("info_ingredient").value;
+                    var ingd_result = saveIngredient
+                    (
+                        '0'
+                        , 'RCP_Ingredient'
+                        , 'RCP_Ingredient'
+                        , RCP_ID
+                        , info_ingredient
+                        , 'RCP_Ingredient_NM'
+                        , 'RCP_Ingredient_Amount'
+                    )
+                    
+                    // 레시피의 도구
+                    var info_equipment = document.getElementById("info_equipment").value;
+                    var equip_result = saveEquipment
+                    (
+                        '0'
+                        , 'RCP_Equipment'
+                        , 'RCP_Equipment'
+                        , RCP_ID
+                        , info_equipment
+                        , 'RCP_Equipment_Amount'
+                    )
+                    
+
+                    // 레시피의 단계
+                    var StepTableList = document.getElementById("step_div").children;
+                    for(var i = 0; i<StepTableList.length; i++)
+                    {
+                        saveStep(
+                            '0'
+                            , 'RCP_STEP'
+                            , 'RCP_STEP'
+                            , RCP_ID
+                            , StepTableList[i].children[1].children[2].children[0].querySelector("input").value
+                            , StepTableList[i].children[1].children[2].children[1].querySelector("input").value
+                            , i
+                            , StepTableList[i].children[1].children[1].children[0].querySelector("input").value
+                            , StepTableList[i].children[1].children[1].children[1].querySelector("input").value
+                            , StepTableList[i].children[1].children[1].children[2].querySelector("input").value
+                            , StepTableList[i].children[1].children[1].children[4].querySelector("input").value
+                            , StepTableList[i].children[1].children[1].children[5].querySelector("input").value
+                            , RCP_ID
+    
+                        );
+                    }
+                    
+                }
+            })
+             .catch(res => console.log(res));
+        }
+        catch(err)
+        {
+            alert("ERR" + err);
+        }
+        finally
+        {
+            return RCP_ID;
+        }
+
+     }
+
+    /// 이름 : 재료 저장 비동기 함수
+    /// 설명 : 레시피 정보 중 재료 정보 전달 하여 true / false 반환
+    /// 비고 : 각종 파라미터 전달
+    async function saveIngredient(
+                          ingd_parent_id, ingd_category, ingd_category_div
+                        , ingd_category_id, ingd_title, ingd_nm, ingd_amount
+                        )
+     {
+        var IsResult = false;
+        try{
+            const response =  await axios.get("http://localhost:8080/api/rcp/create_ingredient_entity", 
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                params:{
+                      INGD_Parent_ID      : ingd_parent_id
+                    , INGD_Category       : ingd_category
+                    , INGD_Category_DIV   : ingd_category_div
+                    , INGD_Category_ID    : ingd_category_id
+                    , INGD_Title          : ingd_title
+                    , INGD_NM	          : ingd_nm
+                    , INGD_Amount         : ingd_amount
+                }
+            })
+             .then(res => {
+             
+                //console.log(res.data.RecipeEntity);
+                IsResult = res.data.ISRESULT;
+            })
+             .catch(res => console.log(res));
+        }
+        catch(err)
+        {
+            alert("ERR" + err);
+        }
+        finally
+        {
+            return IsResult;
+        }
+
+     }
+
+    /// 이름 : 도구 저장 비동기 함수
+    /// 설명 : 레시피 정보 중 도구 정보 전달 하여 true / false 반환
+    /// 비고 : 각종 파라미터 전달
+    async function saveEquipment(
+                          equip_parent_id, equip_category, equip_category_div
+                        , equip_category_id, equip_title, equip_amount
+                        )
+     {
+        var IsResult = false;
+        try{
+            const response =  await axios.get("http://localhost:8080/api/rcp/create_equipment_entity", 
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                params:{
+                      EQUIP_Parent_ID    : equip_parent_id
+                    , EQUIP_Category     : equip_category
+                    , EQUIP_Category_DIV : equip_category_div
+                    , EQUIP_Category_ID  : equip_category_id
+                    , EQUIP_Title        : equip_title
+                    , EQUIP_Amount       : equip_amount
+                }
+            })
+             .then(res => {
+             
+                //console.log(res.data.RecipeEntity);
+                IsResult = res.data.ISRESULT;
+            })
+             .catch(res => console.log(res));
+        }
+        catch(err)
+        {
+            alert("ERR" + err);
+        }
+        finally
+        {
+            return IsResult;
+        }
+
+     }
+
+    /// 이름 : 단계 저장 비동기 함수
+    /// 설명 : 레시피 정보 중 단계 정보 전달 하여 true / false 반환
+    /// 비고 : 각종 파라미터 전달
+    function saveStep(
+                          step_parent_id, step_category, step_category_div
+                          , step_category_id, step_title, step_contents, sort_order
+                          , step_ingredient, step_ingredient_nm, step_ingredient_amount
+                          , step_equipment, step_equipment_amount
+                          , rcp_id
+                        )
+     {
+        var Step_Id = '';
+        var IsResult = false;
+        try{
+            const response =  axios.get("http://localhost:8080/api/rcp/create_step_entity", 
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                params:{
+                     STEP_Parent_ID		 : step_parent_id
+                   , STEP_Category       : step_category
+                   , STEP_Category_DIV   : step_category_div
+                   , STEP_Category_ID    : step_category_id
+                   , STEP_Title          : step_title
+                   , STEP_Contents       : step_contents
+                   , Sort_Order          : sort_order
+                }
+            })
+             .then(res => {
+             
+                //console.log(res.data.RecipeEntity);
+                Step_Id = res.data.StepEntity.STEP_ID;
+
+                if(Step_Id != null && Step_Id >0)
+                {
+                    // 레시피의 단계의 재료
+                    var ingd_result = saveIngredient
+                    (
+                        Step_Id             
+                        , 'RCP_Step_Ingredient'
+                        , 'RCP_Step_Ingredient'
+                        , rcp_id
+                        , step_ingredient
+                        , step_ingredient_nm
+                        , step_ingredient_amount
+                    )
+                    
+                    // 레시피의 단계의 도구
+                    var equip_result = saveEquipment
+                    (
+                        Step_Id
+                        , 'RCP_Step_Equipment'
+                        , 'RCP_Step_Equipment'
+                        , rcp_id
+                        , step_equipment
+                        , step_equipment_amount
+                    )
+
+                    if(ingd_result && equip_result)
+                        IsResult = true;
+
+                }
+            })
+             .catch(res => console.log(res));
+        }
+        catch(err)
+        {
+            alert("ERR" + err);
+        }
+        finally
+        {
+            return IsResult;
+        }
+
+     }
 
      /// 이름 : getAmount()
      /// 설명 : 음식 전체 양 조회
@@ -332,6 +605,90 @@ const RecipeSave = () => {
         
         // 6. ToDo : 데이터 저장 로직 (객체 바인딩 및 Axios 호출)
         // 레시피관련정보, 레시피 단계정보
+        var info_title = document.getElementById("info_title").value;
+        var info_description = document.getElementById("info_description").value;
+
+        var amt = document.getElementById('amt').value;
+        var time = document.getElementById('time').value;
+        var difficulty = document.getElementById('difficulty').value;
+
+
+
+        // 키워드
+        var arrDishType = document.getElementsByName("RCP_DishType_CD");
+        var dishType = '';
+        for(var i = 0; i<arrDishType.length; i++)
+        {
+            if(arrDishType[i].style.fontWeight == 'bold' && arrDishType[i].style.color == 'green')
+            {
+                dishType = arrDishType[i].id;
+                break;
+            }
+        }
+
+        var arrSituation = document.getElementsByName("RCP_Situation_CD");
+        var situation = '';
+        for(var i = 0; i<arrSituation.length; i++)
+        {
+            if(arrSituation[i].style.fontWeight == 'bold' && arrSituation[i].style.color == 'green')
+            {
+                situation = arrSituation[i].id
+                break;
+            }
+        }
+
+        var arrMain = document.getElementsByName("RCP_Main_Ingredients_CD");
+        var main = '';
+        for(var i = 0; i<arrMain.length; i++)
+        {
+            if(arrMain[i].style.fontWeight == 'bold' && arrMain[i].style.color == 'green')
+            {
+                main = arrMain[i].id;
+                break;
+            }
+        }
+
+        var arrMethod = document.getElementsByName("RCP_Method_CD");
+        var method = '';
+        for(var i = 0; i<arrMethod.length; i++)
+        {
+            if(arrMethod[i].style.fontWeight == 'bold' && arrMethod[i].style.color == 'green')
+            {
+                method = arrMethod[i].id;
+                break;
+            }
+        }
+
+        var arrTheme = document.getElementsByName("RCP_Theme_CD");
+        var theme = '';
+        for(var i = 0; i<arrTheme.length; i++)
+        {
+            if(arrTheme[i].style.fontWeight == 'bold' && arrTheme[i].style.color == 'green')
+            {
+                theme = arrTheme[i].id;
+                break;
+            }
+        }
+
+        
+
+        var RCP_ID = saveRecipe(
+              info_title        // 제목
+            , info_description  // 내용
+            , amt               // 음식 양
+            , time              // 조리 시간
+            , difficulty        // 난이도
+            , dishType
+            , situation
+            , main
+            , method
+            , theme
+            , saveFlag
+        );
+
+        
+        
+        
 
      }
  
@@ -465,7 +822,7 @@ const RecipeSave = () => {
             alert("레시피 재료를 입력하세요");
             return false;
         }
-
+        
         var info_equipment = document.getElementById("info_equipment").value;
         if(info_equipment.trim() == '')
         {
@@ -473,14 +830,14 @@ const RecipeSave = () => {
             return false;
         }
         
-
+        
         var info_title = document.getElementById("info_title").value;
         if(info_title.trim() == '')
         {
             alert("레시피 제목을 입력하세요");
             return false;
         }
-        
+
         var info_description = document.getElementById("info_description").value;
         if(info_description.trim() == '')
         {
@@ -896,8 +1253,8 @@ const RecipeSave = () => {
             {/* 버튼 영역 */}
             <div className={styles.recipe_save_btn_wrap}>
                 <div>
-                    <input type="button"  value="공개" className={styles.recipe_save_open_btn} onClick={(e) => check_Data(e, 'open')}/>
-                    <input type="button"  value="저장"  className={styles.recipe_save_btn} onClick={(e) => check_Data(e, 'save')}/>
+                    <input type="button"  value="공개" className={styles.recipe_save_open_btn} onClick={(e) => check_Data(e, 'Y')}/>
+                    <input type="button"  value="저장"  className={styles.recipe_save_btn} onClick={(e) => check_Data(e, 'N')}/>
                 </div>
             </div>
 
