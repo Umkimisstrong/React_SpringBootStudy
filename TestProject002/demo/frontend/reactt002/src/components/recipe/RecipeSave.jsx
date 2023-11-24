@@ -152,9 +152,10 @@ const RecipeSave = () => {
 
                     // 레시피의 단계
                     var StepTableList = document.getElementById("step_div").children;
+                    var IsResult_SaveStep = false;
                     for(var i = 0; i<StepTableList.length; i++)
                     {
-                        saveStep(
+                        IsResult_SaveStep = saveStep(
                             '0'
                             , 'RCP_STEP'
                             , 'RCP_STEP'
@@ -170,6 +171,15 @@ const RecipeSave = () => {
                             , RCP_ID
     
                         );
+                    }
+
+                    if(IsResult_SaveStep)
+                    {
+                        alert("레시피 저장 성공");
+                    }
+                    else
+                    {
+                        alert("레시피 저장 실패");
                     }
                     
                 }
@@ -671,8 +681,8 @@ const RecipeSave = () => {
         }
 
         
-
-        var RCP_ID = saveRecipe(
+        // 레시피 저장
+        saveRecipe(
               info_title        // 제목
             , info_description  // 내용
             , amt               // 음식 양
