@@ -171,16 +171,21 @@ const RecipeSave = () => {
                             , RCP_ID
     
                         );
+
+                        if(i == StepTableList.length-1)
+                        {
+                            if(IsResult_SaveStep)
+                            {
+                                alert("레시피 저장 성공");
+                            }
+                            else
+                            {
+                                alert("레시피 저장 실패");
+                            }
+                        }
                     }
 
-                    if(IsResult_SaveStep)
-                    {
-                        alert("레시피 저장 성공");
-                    }
-                    else
-                    {
-                        alert("레시피 저장 실패");
-                    }
+                    
                     
                 }
             })
@@ -289,7 +294,7 @@ const RecipeSave = () => {
     /// 이름 : 단계 저장 비동기 함수
     /// 설명 : 레시피 정보 중 단계 정보 전달 하여 true / false 반환
     /// 비고 : 각종 파라미터 전달
-    function saveStep(
+    async function saveStep(
                           step_parent_id, step_category, step_category_div
                           , step_category_id, step_title, step_contents, sort_order
                           , step_ingredient, step_ingredient_nm, step_ingredient_amount
@@ -300,7 +305,7 @@ const RecipeSave = () => {
         var Step_Id = '';
         var IsResult = false;
         try{
-            const response =  axios.get("http://localhost:8080/api/rcp/create_step_entity", 
+            const response =  await axios.get("http://localhost:8080/api/rcp/create_step_entity", 
             {
                 headers: {
                     'Access-Control-Allow-Origin': 'http://localhost:3000',
