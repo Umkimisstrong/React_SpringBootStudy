@@ -708,6 +708,9 @@ const RecipeSave = () => {
      }
  
 
+     /// 이름 : check_Keyword()
+     /// 설명 : 키워드 선택여부 검증
+     /// 비고 : true / false 반환
      function check_Keyword()
      {
         var flag = false;
@@ -808,6 +811,9 @@ const RecipeSave = () => {
         return flag;
      }
 
+     /// 이름 : check_DropDown()
+     /// 설명 : DropDown 요소 선택여부 검증
+     /// 비고 : true / false 반환
      function check_DropDown()
      {
         if(document.getElementById('amt').value == '')
@@ -829,6 +835,9 @@ const RecipeSave = () => {
         return true;
      }
 
+     /// 이름 : check_TextBox()
+     /// 설명 : TextBox 요소 선택여부 검증
+     /// 비고 : true / false 반환
      function check_TextBox()
      {
         var info_ingredient = document.getElementById("info_ingredient").value;
@@ -863,6 +872,9 @@ const RecipeSave = () => {
         return true;
      }
 
+     /// 이름 : check_Step()
+     /// 설명 : 단계 요소 입력여부 검증
+     /// 비고 : true / false 반환
      function check_Step()
      {
         var flag = true;
