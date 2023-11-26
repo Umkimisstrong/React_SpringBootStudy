@@ -176,7 +176,8 @@ const RecipeSave = () => {
                         {
                             if(IsResult_SaveStep)
                             {
-                                alert("레시피 저장 성공");
+                                // 목록으로 이동
+                                window.location.href = 'http://localhost:3000/default/index';
                             }
                             else
                             {
