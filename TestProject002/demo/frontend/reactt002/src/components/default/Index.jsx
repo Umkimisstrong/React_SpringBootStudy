@@ -1,8 +1,12 @@
 /*
     메인 화면, 사용자 최초 접근 시 페이지
 */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "../../components/cssModule/default/Index.module.css";
+import axios from "axios";
+
+
+
 
     /// 이름 : onclickHref(주소, 이벤트객체) 
     /// 설명 : 넘겨받은 주소로 이동시키는 함수
@@ -16,6 +20,39 @@ import styles from "../../components/cssModule/default/Index.module.css";
 
 const Index = () => {
 
+    const [data, setData] = useState('');
+
+    useEffect(() => {
+             axios.get("http://localhost:8080/api/rcp/select_recipe_entity_list", 
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Access-Control-Allow-Methods': 'GET',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+                params:{
+                    //   RCP_Title                   : rcp_title
+                    // , RCP_Contents                : rcp_contents
+                    // , RCP_Amount_CD               : rcp_amount_cd
+                    // , RCP_Time_CD	              : rcp_time_cd
+                    // , RCP_Difficulty_CD           : rcp_difficulty_cd
+                    // , RCP_DishType_CD             : rcp_dishtype_cd
+                    // , RCP_Situation_CD            : rcp_situation_cd
+                    // , RCP_Main_Ingredients_CD     : rcp_main_ingredients_cd
+                    // , RCP_Method_CD               : rcp_method_cd
+                    // , RCP_Theme_CD                : rcp_theme_cd
+                    // , Open_YN                     : open_yn
+                }
+            })
+        .then((res) => {
+            setData(res.data);
+            console.log(res);
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }, []);
     return (
         <div>
             {/* 검색 영역 */}
